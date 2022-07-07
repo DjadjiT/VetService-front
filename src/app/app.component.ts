@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front';
+  title = 'Vetservice';
+  isConnected: boolean = true
+
+  ngOnInit(){
+
+  }
+
+  connection(){
+    this.isConnected = !this.isConnected;
+  }
 }

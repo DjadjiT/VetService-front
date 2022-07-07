@@ -13,6 +13,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import { SearchVetPageComponent } from './search-vet-page/search-vet-page.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { VetSignupPageComponent } from './vet-signup-page/vet-signup-page.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { SearchVetPageComponent } from './search-vet-page/search-vet-page.compon
     BackOfficePageComponent,
     LoginPageComponent,
     VetPageComponent,
-    SearchVetPageComponent
+    SearchVetPageComponent,
+    VetSignupPageComponent
   ],
   imports: [
     BrowserModule,
@@ -32,13 +36,21 @@ import { SearchVetPageComponent } from './search-vet-page/search-vet-page.compon
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSlideToggleModule,
   ],
   exports:[
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

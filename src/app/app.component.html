@@ -35,10 +35,6 @@
   }
 
   .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     height: 60px;
     display: flex;
     align-items: center;
@@ -112,17 +108,33 @@
     font-family: Leckerli One;
     font-weight: lighter;
     margin: 0 20px;
+    font-size: 26px;
   }
 
 </style>
 
 <!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <h2 class="titre">Vetservices</h2>
+<mat-toolbar class="toolbar">
+  <button mat-button class="titre" routerLink="">Vetservices</button>
   <div class="spacer"></div>
-  <button mat-raised-button class="pro">Vous êtes un professionnel de santé ?</button>
-  <button mat-button class="connect">Se connecter / S'inscrire</button>
-</div>
+  <div [hidden]="!isConnected">
+    <button mat-stroked-button color="#0" routerLink="profile">
+      <mat-icon>date_range</mat-icon> Mes rendez-vous
+    </button>
+    <button mat-stroked-button color="#0" routerLink="profile">
+      <mat-icon>person</mat-icon> Mon profil
+    </button>
+  </div>
+  <div [hidden]="isConnected">
+    <button mat-raised-button class="pro" routerLink="vet-signup">Vous êtes un professionnel de santé ?</button>
+    <button mat-button class="connect" routerLink="login">Se connecter / S'inscrire</button>
+  </div>
+  <mat-slide-toggle
+    (change)="connection()"
+    [checked]="isConnected">
+    Connecter
+  </mat-slide-toggle>
+</mat-toolbar>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
