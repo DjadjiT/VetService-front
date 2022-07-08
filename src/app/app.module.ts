@@ -16,6 +16,14 @@ import { SearchVetPageComponent } from './search-vet-page/search-vet-page.compon
 import {MatToolbarModule} from "@angular/material/toolbar";
 import { VetSignupPageComponent } from './vet-signup-page/vet-signup-page.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -39,6 +47,16 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MatToolbarModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
   ],
   exports:[
     MatButtonModule,
@@ -47,8 +65,19 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MatToolbarModule,
     MatIconModule,
     MatSlideToggleModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

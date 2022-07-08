@@ -1,0 +1,42 @@
+
+.signup{
+  margin: 50px;
+  text-align: center;
+  padding: 20px 50px;
+}
+
+.signin{
+  margin: 50px;
+  text-align: center;
+  padding: 20px 50px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn {
+  color: #00AA55;
+  font-size: 20px;
+}
+
+.inside_btn {
+  color: #fff;
+  font-size: 20px;
+  background-color: #00AA55;
+}
+
+.input {
+  width: 300px;
+}

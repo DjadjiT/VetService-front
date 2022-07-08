@@ -1,0 +1,45 @@
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.address{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.address_input{
+  width: 240px;
+  margin: 10px;
+}
+
+.btn {
+  color: #fff;
+  font-size: 20px;
+  background-color: #00AA55;
+}
+
+
+.input {
+  width: 500px;
+}
+
+.signup{
+  margin: 50px;
+  text-align: center;
+  padding: 20px 50px;
+}
