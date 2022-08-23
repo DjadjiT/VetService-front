@@ -1,0 +1,147 @@
+<div class="admin_page">
+  <mat-accordion class="take_space">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="justify-content: center">
+          <h2>Gestion admins</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr mat-header-row>
+          <th mat-sort-header="email">Adresse mail</th>
+          <th mat-sort-header="firstName">Prénom</th>
+          <th mat-sort-header="lastName">Nom</th>
+          <th>Supprimer</th>
+        </tr>
+
+        <tr mat-row *ngFor="let admin of adminList; index as i" class="new_admin_card">
+          <td>{{admin.email}}</td>
+          <td>{{admin.firstName}}</td>
+          <td>{{admin.lastName}}</td>
+          <td>
+            <button
+              mat-stroked-button
+              (click)="removeFromAdmin(i)">
+              Supprimer les droits
+              <mat-icon [ngStyle]="{'color':'#D02F27'}">remove_circle_outline</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <mat-divider></mat-divider>
+
+      <ng-container [formGroup]="adminForm">
+        <ng-container formArrayName="admins">
+          <ng-container *ngFor="let adminControl of admins.controls; index as i">
+            <mat-card class="mat-elevation-z4">
+              <div [formGroupName]="i" class="admin_card">
+                <div class="admin_row">
+                  <div class="card_element">
+                    <mat-form-field
+                      class="field"
+                      appearance="outline">
+                      <mat-label>Adresse mail de l'admin</mat-label>
+                      <input matInput placeholder="Adresse mail de l'admin" formControlName="email" required>
+                    </mat-form-field>
+                  </div>
+                  <div class="card_element">
+                    <mat-form-field
+                      class="input"
+                      appearance="outline">
+                      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <mat-label>Mot de passe</mat-label>
+                      <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <button
+                  mat-stroked-button
+                  class="red_btn"
+                  style="margin: 10px"
+                  (click)="removeAdmin(i)">Supprimer l'admin</button>
+              </div>
+            </mat-card>
+            <mat-divider [inset]="true"></mat-divider>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <button
+        mat-stroked-button
+        class="btn"
+        style="margin: 10px"
+        (click)="addAdmin()">Ajouter un admin</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="justify-content: center">
+          <h2>Gestion vétérinaires</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <h3 style="margin: 30px; font-weight: 500">Compte Vétérinaires à valider :</h3>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr mat-header-row>
+          <th mat-header-cell mat-sort-header="email">Adresse mail</th>
+          <th mat-header-cell mat-sort-header="firstName">Prénom</th>
+          <th mat-header-cell mat-sort-header="lastName">Nom</th>
+          <th mat-header-cell mat-sort-header="city">Ville</th>
+          <th>Informations</th>
+        </tr>
+
+        <tr mat-row *ngFor="let vet of vetToValidate; index as i"
+            (click)="openVetDialog(i)">
+          <td>{{vet.email}}</td>
+          <td>{{vet.firstName}}</td>
+          <td>{{vet.lastName}}</td>
+          <td>{{vet.city}}</td>
+          <td>
+            <button
+              mat-stroked-button
+              (click)="openVetInfo(vet)">
+              Plus d'informations
+              <mat-icon [ngStyle]="{'color':'#00AA55'}">info</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <h3 style="margin: 30px; font-weight: 500">Listes des vétérinaires :</h3>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr mat-header-row>
+          <th mat-header-cell mat-sort-header="email">Adresse mail</th>
+          <th mat-header-cell mat-sort-header="firstName">Prénom</th>
+          <th mat-header-cell mat-sort-header="lastName">Nom</th>
+          <th mat-header-cell mat-sort-header="city">Ville</th>
+          <th>Informations</th>
+        </tr>
+
+        <tr mat-row *ngFor="let vet of vetList; index as i"
+            (click)="openVetDialog(i)">
+          <td>{{vet.email}}</td>
+          <td>{{vet.firstName}}</td>
+          <td>{{vet.lastName}}</td>
+          <td>{{vet.city}}</td>
+          <td>
+            <button
+              mat-stroked-button
+              (click)="openVetInfo(vet)">
+              Plus d'informations
+              <mat-icon [ngStyle]="{'color':'#00AA55'}">info</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="justify-content: center">
+          <h2>Gestion des données Vetservices</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -1,0 +1,39 @@
+.dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.valid_btn {
+  margin: 10px;
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #00AA55;
+}
+
+
+.refuse_btn {
+  margin: 10px;
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #D02F27;
+}
+
+.bottom_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.btn_action{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+

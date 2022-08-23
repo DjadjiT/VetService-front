@@ -1,0 +1,83 @@
+
+.admin_page{
+  margin: 20px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-flow: row wrap;
+}
+
+.card_element {
+  flex: 1;
+  margin: 20px;
+  padding: 10px;
+}
+
+.admin_card{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-flow: column;
+}
+
+.admin_row{
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+}
+
+.btn{
+  padding: 5px 20px;
+  color: #00AA55;
+}
+
+.red_btn{
+  padding: 5px 20px;
+  color: #D02F27;
+}
+
+.field{
+  width: 10vw;
+}
+
+.new_admin_card{
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.left_card{
+  flex: 4;
+}
+
+.right_card{
+  flex: 1;
+}
+
+.adminList_row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row;
+}
+
+.take_space{
+  margin: 10px;
+  width: 80%;
+}
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-column-demo-position {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}

@@ -24,3 +24,7 @@ export const SPECIALITYLIST: string[] = [
     "Sciences et médecine des animaux de laboratoire",
     "Stomatologie et dentisterie vétérinaires"
   ];
+
+export const gender: string[] =  ['Monsieur','Madame', 'Autre']
+
+export const paymentMethod: string[] = ["Carte Bancaire", "Espèce", "Chèque"];

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { BackOfficePageComponent } from './back-office-page/back-office-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { VetPageComponent } from './vet-page/vet-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,22 +23,44 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-
+import {GoogleMapsModule} from "@angular/google-maps";
+import {HttpClientModule} from "@angular/common/http";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatDialogModule} from "@angular/material/dialog";
+import { ProfileDialogComponent } from './dialog/profile-dialog/profile-dialog.component';
+import { DialogRecordComponent } from './dialog-new-record/dialog-record.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { AppointementPageComponent } from './appointement-page/appointement-page.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AppointementDetailsComponent } from './appointement-details/appointement-details.component';
+import { AdminBackOfficeComponent } from './admin-back-office/admin-back-office.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatSortModule} from "@angular/material/sort";
+import {CdkColumnDef} from "@angular/cdk/table";
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     ProfilePageComponent,
-    BackOfficePageComponent,
     LoginPageComponent,
     VetPageComponent,
     SearchVetPageComponent,
-    VetSignupPageComponent
+    VetSignupPageComponent,
+    ProfileDialogComponent,
+    DialogRecordComponent,
+    AppointementPageComponent,
+    AppointementDetailsComponent,
+    AdminBackOfficeComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    GoogleMapsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
@@ -57,6 +78,14 @@ import {MatSelectModule} from "@angular/material/select";
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatCardModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatSortModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   exports:[
     MatButtonModule,
@@ -73,10 +102,14 @@ import {MatSelectModule} from "@angular/material/select";
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatDialogModule,
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    HttpClientModule,
+    CdkColumnDef
   ],
   bootstrap: [AppComponent]
 })

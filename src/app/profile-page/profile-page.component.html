@@ -1,1 +1,333 @@
-<p>profile-page works!</p>
+<div class="content">
+
+  <div *ngIf="profile.role=='client'; else isVet">
+
+    <mat-card>
+      <mat-card-title class="mat_title">
+        <div class="spacer"></div>
+        <h2>Mon profil</h2>
+        <div class="spacer"></div>
+      </mat-card-title>
+      <mat-divider></mat-divider>
+      <div class="user_info">
+        <div [formGroup]="form" class="form">
+
+          <mat-form-field
+            class="input"
+            appearance="outline">
+            <mat-icon matPrefix>phone</mat-icon>
+            <mat-label>Numéro de téléphone</mat-label>
+            <input type="tel" formControlName="phoneNb" maxlength="10" matInput placeholder="0123456789" [attr.disabled]="editMode">
+          </mat-form-field>
+
+          <mat-form-field
+            class="input"
+            appearance="outline">
+            <mat-label>Adresse email</mat-label>
+            <input matInput placeholder="Adresse email" formControlName="email" required [attr.disabled]="editMode">
+            <mat-icon matPrefix>email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field
+            class="input"
+            appearance="outline"
+            style="margin-bottom: 10px">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-label>Mot de passe</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required [attr.disabled]="editMode">
+            <mat-hint align="start" >La taille minimale est de 5 caractères. </mat-hint>
+          </mat-form-field>
+
+          <mat-form-field
+            class="input"
+            appearance="outline" >
+            <mat-label>Votre date de naissance </mat-label>
+            <input formControlName="birthDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required >
+            <mat-hint>JJ/MM/AAAA</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker" [attr.disabled]="editMode"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field
+            class="input"
+            appearance="outline">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-label>Nom</mat-label>
+            <input formControlName="lastName" matInput required [attr.disabled]="editMode">
+          </mat-form-field>
+
+          <mat-form-field
+            class="input"
+            appearance="outline">
+            <mat-icon matPrefix>person_outline</mat-icon>
+            <mat-label>Prénom</mat-label>
+            <input formControlName="firstName" matInput required [attr.disabled]="editMode">
+          </mat-form-field>
+          <mat-radio-group
+            formControlName="gender">
+            <mat-radio-button class="example-radio-button" *ngFor="let g of genderList" [value]="g" [attr.disabled]="editMode">
+              {{g}}
+            </mat-radio-button>
+          </mat-radio-group>
+
+
+        </div>
+      </div>
+
+
+      <mat-card-actions class="mat_center">
+        <button
+          mat-raised-button
+          class="inside_btn"
+          style="margin: 10px"
+          (click)="canSave()">
+          Enregistrer les modifications
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="health_record">
+      <mat-card-title class="mat_title">
+        <div class="spacer"></div>
+        <h2>Mes carnets de santé</h2>
+        <div class="spacer"></div>
+      </mat-card-title>
+      <mat-divider></mat-divider>
+
+      <div class="health_record_info" *ngFor="let record of healthRecord">
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="header-image">
+              <mat-icon matPrefix>pets</mat-icon>
+            </div>
+            <mat-card-title>{{record.name}}</mat-card-title>
+            <mat-card-subtitle>{{record.type}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions class="btn_action">
+
+            <button
+              mat-raised-button
+              class="delete_btn"
+              style="margin: 10px"
+              (click)="deleteRecord(record.id)">
+              Supprimer
+            </button>
+
+            <button
+              mat-raised-button
+              class="inside_btn"
+              style="margin: 10px"
+              (click)="editRecord(record.id)">
+              Editer
+            </button>
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <mat-card-actions class="btn_action">
+        <button
+          mat-raised-button
+          class="inside_btn"
+          style="margin: 10px"
+          (click)="newRecord()">
+          Ajouter un carnet
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #isVet>
+    <div>
+      <mat-card style="margin: 10px">
+        <mat-card-title class="mat_title">
+          <h2>Mon planning</h2>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <div class="schedule">
+          <div class="planning_days">
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[0]" >
+              Lundi
+            </mat-checkbox>
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[1]">
+              Mardi
+            </mat-checkbox>
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[2]">
+              Mercredi
+            </mat-checkbox>
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[3]">
+              Jeudi
+            </mat-checkbox>
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[4]">
+              Vendredi
+            </mat-checkbox>
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[5]">
+              Samedi
+            </mat-checkbox>
+            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[6]">
+              Dimanche
+            </mat-checkbox>
+          </div>
+
+          <div>
+            <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+            <hr>
+            <pre>Selected time: {{time | json}}</pre>
+          </div>
+        </div>
+      </mat-card>
+
+      <mat-card style="margin: 10px">
+        <mat-card-title class="mat_title">
+          <h2>Mon profil</h2>
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <div class="user_info">
+          <div [formGroup]="form" class="form">
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-icon matPrefix>phone</mat-icon>
+              <mat-label>Numéro de téléphone</mat-label>
+              <input type="tel" formControlName="phoneNb" maxlength="10" matInput placeholder="0123456789" [attr.disabled]="editMode">
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-label>Adresse email</mat-label>
+              <input matInput placeholder="Adresse email" formControlName="email" required [attr.disabled]="editMode">
+              <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline"
+              style="margin-bottom: 10px">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-label>Mot de passe</mat-label>
+              <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required [attr.disabled]="editMode">
+              <mat-hint align="start" >La taille minimale est de 5 caractères. </mat-hint>
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline" >
+              <mat-label>Votre date de naissance </mat-label>
+              <input formControlName="birthDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required >
+              <mat-hint>JJ/MM/AAAA</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker" [attr.disabled]="editMode"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-icon matPrefix>person</mat-icon>
+              <mat-label>Nom</mat-label>
+              <input formControlName="lastName" matInput required [attr.disabled]="editMode">
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-icon matPrefix>person_outline</mat-icon>
+              <mat-label>Prénom</mat-label>
+              <input formControlName="firstName" matInput required [attr.disabled]="editMode">
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-label>Choisissez votre specialité</mat-label>
+              <mat-select formControlName="speciality" required formControlName="speciality">
+                <mat-option *ngFor="let sepc of speciality" [value]="sepc">
+                  {{sepc}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-label>Numéro RPPS
+              </mat-label>
+              <input formControlName="rpps" type="tel" maxlength="12" matInput required>
+            </mat-form-field>
+
+            <h3>Informations du cabinet :</h3>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-label>Nom de l'établissement</mat-label>
+              <input formControlName="name" matInput required>
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-icon matPrefix>phone</mat-icon>
+              <mat-label>Numéro de téléphone</mat-label>
+              <input type="tel" formControlName="phoneNb" maxlength="10" matInput placeholder="0123456789" required>
+            </mat-form-field>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-label>Adresse</mat-label>
+              <input formControlName="address" matInput required>
+            </mat-form-field>
+
+            <div class="address">
+
+              <mat-form-field
+                class="address_input"
+                appearance="outline">
+                <mat-icon matPrefix>location_city</mat-icon>
+                <mat-label>Ville</mat-label>
+                <input formControlName="city" matInput required>
+              </mat-form-field>
+
+              <mat-form-field
+                class="address_input"
+                appearance="outline">
+                <mat-label>Code Postal</mat-label>
+                <input formControlName="postalCode" matInput maxlength="5" required>
+                <mat-hint align="end">{{getPostalCodeLength()}} / 5</mat-hint>
+              </mat-form-field>
+
+            </div>
+
+            <mat-form-field
+              class="input"
+              appearance="outline">
+              <mat-label>Notes complémentaires</mat-label>
+              <textarea matInput formControlName="notes"> </textarea>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <mat-card-actions class="mat_center">
+          <button
+            mat-raised-button
+            class="inside_btn"
+            style="margin: 10px"
+            (click)="canSave()">
+            Enregistrer les modifications
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+
+  </ng-template>
+
+</div>

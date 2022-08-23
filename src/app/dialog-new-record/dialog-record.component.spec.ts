@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackOfficePageComponent } from './back-office-page.component';
+import { DialogRecordComponent } from './dialog-record.component';
 
-describe('BackOfficePageComponent', () => {
-  let component: BackOfficePageComponent;
-  let fixture: ComponentFixture<BackOfficePageComponent>;
+describe('DialogNewRecordComponent', () => {
+  let component: DialogRecordComponent;
+  let fixture: ComponentFixture<DialogRecordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BackOfficePageComponent ]
+      declarations: [ DialogRecordComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BackOfficePageComponent);
+    fixture = TestBed.createComponent(DialogRecordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

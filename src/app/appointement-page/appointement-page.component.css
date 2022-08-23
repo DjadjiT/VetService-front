@@ -1,0 +1,35 @@
+.list {
+  margin: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.appointement{
+  padding: 30px;
+  margin: 10px;
+}
+
+.details{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.btn_action{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.btn_postpone{
+  flex: 1;
+  color: #00AA55;
+}
+
+.btn_cancel{
+  flex: 1;
+  color: #D02F27;
+}

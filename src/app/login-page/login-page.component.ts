@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {gender} from "../models/Constant";
 
 @Component({
   selector: 'app-login-page',
@@ -12,6 +13,8 @@ export class LoginPageComponent implements OnInit {
   connectForm: FormGroup;
   submitted = false;
 
+  genderList: string[] = gender
+
   constructor(private formBuilder: FormBuilder) {
     this.registerForm = this.formBuilder.group({
       phoneNb: ['', [ Validators.required,
@@ -22,7 +25,8 @@ export class LoginPageComponent implements OnInit {
       lastName: ['', [Validators.required]],
       birthDate : ['', [Validators.required]],
       password : ['', [Validators.required, Validators.minLength(5)]],
-      remember: ['', []]
+      gender: ['', [Validators.required]],
+      remember: ['', []],
     });
 
     this.connectForm = this.formBuilder.group({
@@ -40,6 +44,7 @@ export class LoginPageComponent implements OnInit {
   isSignIn: boolean = true;
   hide : boolean = true;
   remember : boolean = false;
+  editMode: boolean = false;
 
 
   signInToUp(){

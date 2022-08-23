@@ -1,0 +1,67 @@
+<div class="dialog" *ngIf="user.role=='veterinary'">
+  <div mat-dialog-title style="justify-content: center">
+    <h1> <span style="font-weight: 500">Détails du profil Vétérinaire : </span> {{user.lastName}} {{user.firstName}}</h1>
+  </div>
+  <mat-divider></mat-divider>
+
+  <h2><span style="text-decoration: underline">Spécialité</span> : {{user.speciality}}</h2>
+
+
+  <h2 style="text-decoration: underline">Informations du practicien :</h2>
+  <h3 *ngIf="user.birthDate!=null"><span style="font-weight: 500">Date de naissance :</span> {{formatDateLocaleDateString(user.birthDate)}} </h3>
+  <h3><span style="font-weight: 500">Numéro de télephone :</span> {{user.phoneNb}} </h3>
+  <h3 *ngIf="user.informations!=null"><span style="font-weight: 500">Informations complémentaire :</span> {{user.informations.informations}} </h3>
+  <h3><span style="font-weight: 500">Numéror rpps :</span> {{user.rpps}} </h3>
+
+  <h2 style="text-decoration: underline">Adresse du practicien :</h2>
+  <a href="{{getGMapLink()}}" >{{user.street}} {{user.postalCode}} {{user.city}}, {{user.country}}</a>
+
+  <div *ngIf="invoiceList.length>0">
+    <h2 style="text-decoration: underline">Factures :</h2>
+    <div *ngFor="let invoice of invoiceList">
+
+    </div>
+  </div>
+
+  <div *ngIf="appointmentList.length>0">
+    <h2 style="text-decoration: underline">Historique de rendez-vous :</h2>
+
+    <div *ngFor="let appointment of appointmentList" style="margin: 10px">
+      <mat-card style="width: 30vw">
+        <mat-card-title>
+          {{formatDateLocaleDateString(appointment.date)}}
+        </mat-card-title>
+        <mat-card-content>
+          Motif de consultation : {{appointment.appointementType}} <br> <br>
+          pour {{appointment.healthRecord.name}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="bottom_btn" *ngIf="!user.active; else isActive">
+    <div class="btn_action">
+      <button mat-stroked-button class="refuse_btn" (click)="refuseVet()">
+        <mat-icon>close</mat-icon> Refuser profil Vétérinaire
+      </button>
+
+      <button mat-stroked-button class="valid_btn" (click)="validateVet()">
+        <mat-icon>check</mat-icon> Valider
+      </button>
+    </div>
+  </div>
+
+  <ng-template #isActive>
+    <div mat-dialog-actions class="bottom_btn">
+      <div class="btn_action">
+        <button mat-stroked-button class="valid_btn" (click)="sendReminderInvoice()">
+          <mat-icon>send</mat-icon> Envoyer rappel de facture à payer
+        </button>
+
+        <button mat-stroked-button class="refuse_btn" (click)="deactivateVet()">
+          <mat-icon>report_off</mat-icon> Desactiver le profil Vétérinaire
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>

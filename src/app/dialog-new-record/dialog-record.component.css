@@ -1,0 +1,73 @@
+
+.save_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #00AA55;
+}
+
+.add_element{
+  color: #fff;
+  font-size: 20px;
+  background-color: #00AA55;
+}
+
+
+.close_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #D02F27;
+}
+
+.dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.card{
+  width: 25evw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.form{
+  display: flex;
+  width: 600px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.field{
+  margin: 10px;
+  width:25evw
+}
+
+.h1{
+  font-weight: bold;
+}
+
+.left_side_dialog{
+  flex-grow: 4;
+}
+.right_side_dialog{
+  flex-grow: 1;
+}
+
+.vaccin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.rad_btn{
+  margin: 10px;
+}

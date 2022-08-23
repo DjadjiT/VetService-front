@@ -118,7 +118,10 @@
   <button mat-button class="titre" routerLink="">Vetservices</button>
   <div class="spacer"></div>
   <div [hidden]="!isConnected">
-    <button mat-stroked-button color="#0" routerLink="profile">
+    <button mat-stroked-button color="#0" routerLink="admin">
+      <mat-icon>security</mat-icon> Espace Administrateur
+    </button>
+    <button mat-stroked-button color="#0" routerLink="appointement">
       <mat-icon>date_range</mat-icon> Mes rendez-vous
     </button>
     <button mat-stroked-button color="#0" routerLink="profile">

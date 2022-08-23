@@ -27,7 +27,7 @@
         <mat-checkbox formControlName="remember" style="margin: 10px">Se souvenir de mon identifiant</mat-checkbox>
 
         <button
-          mat-raised-button
+          mat-stroked-button
           class="inside_btn"
           style="margin: 10px"
           (click)="signIn()"
@@ -39,7 +39,7 @@
     </div>
     <div [hidden]="!isSignIn">
       <div style="padding-top: 10px">
-        <button mat-button class="btn" (click)="signInToUp()">Se connecter</button>
+        <button mat-stroked-button class="btn" (click)="signInToUp()">Se connecter</button>
       </div>
     </div>
   </mat-card>
@@ -106,12 +106,17 @@
           <mat-label>Prénom</mat-label>
           <input formControlName="firstName" matInput required>
         </mat-form-field>
-
+        <mat-radio-group
+          formControlName="gender">
+          <mat-radio-button class="example-radio-button" *ngFor="let g of genderList" [value]="g">
+            {{g}}
+          </mat-radio-button>
+        </mat-radio-group>
 
         <mat-checkbox formControlName="remember" style="margin: 10px">Se souvenir de mon identifiant</mat-checkbox>
 
         <button
-          mat-raised-button
+          mat-stroked-button
           class="inside_btn"
           style="margin: 10px"
           (click)="signUp()"
@@ -123,7 +128,7 @@
     <div [hidden]="isSignIn">
 
       <div style="padding-top: 10px">
-        <button mat-button class="btn" (click)="signInToUp()">S'inscrire</button>
+        <button mat-stroked-button class="btn" (click)="signInToUp()">S'inscrire</button>
       </div>
     </div>
   </mat-card>

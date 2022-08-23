@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-import {SPECIALITYLIST} from '../Constant'
+import {SPECIALITYLIST} from '../models/Constant'
 
 @Component({
   selector: 'app-vet-signup-page',
@@ -28,6 +28,7 @@ export class VetSignupPageComponent implements OnInit {
       city : ['', [Validators.required]],
       speciality : ['', [Validators.required]],
       rpps: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
+      notes: ['', []]
     });
     this.maxDate = new Date();
   }
