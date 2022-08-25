@@ -149,33 +149,52 @@
         <mat-divider></mat-divider>
         <div class="schedule">
           <div class="planning_days">
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[0]" >
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[0]" >
               Lundi
             </mat-checkbox>
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[1]">
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[1]">
               Mardi
             </mat-checkbox>
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[2]">
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[2]">
               Mercredi
             </mat-checkbox>
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[3]">
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[3]">
               Jeudi
             </mat-checkbox>
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[4]">
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[4]">
               Vendredi
             </mat-checkbox>
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[5]">
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[5]">
               Samedi
             </mat-checkbox>
-            <mat-checkbox class="working_days" [(ngModel)]="schedule.workingDay[6]">
+            <mat-checkbox class="working_days" [(ngModel)]="profile.schedule.workingDay[6]">
               Dimanche
             </mat-checkbox>
           </div>
 
-          <div>
-            <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
-            <hr>
-            <pre>Selected time: {{time | json}}</pre>
+          <div [formGroup]="scheduleForm">
+            <div class="hours">
+              <mat-form-field appearance="outline" style="margin: 10px">
+                <mat-label>Date de début de journée :</mat-label>
+                <input type="time" matInput name="week" min="09:00" max="18:00" required formControlName="start">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="margin: 10px">
+                <mat-label>Date de pause :</mat-label>
+                <input type="time" matInput name="week" min="09:00" max="18:00" required formControlName="pause">
+              </mat-form-field>
+            </div>
+            <div class="hours">
+              <mat-form-field appearance="outline" style="margin: 10px">
+                <mat-label>Date de fin de pause :</mat-label>
+                <input type="time" matInput name="week" required formControlName="endPause">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" style="margin: 10px">
+                <mat-label>Date de fin de journée :</mat-label>
+                <input type="time" matInput name="week" required formControlName="end">
+              </mat-form-field>
+            </div>
           </div>
         </div>
       </mat-card>

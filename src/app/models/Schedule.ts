@@ -1,14 +1,14 @@
 
 export class Schedule {
-  private _startingHour: number
-  private _pauseStart: number
-  private _pauseFinish: number
-  private _finishingHour: number
+  private _startingHour?: string
+  private _pauseStart?: string
+  private _pauseFinish?: string
+  private _finishingHour?: string
   private _workingDay: boolean[]
 
 
-  constructor(startingHour: number, pauseStart: number, pauseFinish: number, finishingHour: number,
-              workingDay: boolean[]) {
+  constructor(workingDay: boolean[], startingHour: string | undefined,
+              pauseStart: string | undefined, pauseFinish: string | undefined, finishingHour: string | undefined){
     this._startingHour = startingHour;
     this._pauseStart = pauseStart;
     this._pauseFinish = pauseFinish;
@@ -17,35 +17,35 @@ export class Schedule {
   }
 
 
-  get pauseStart(): number {
-    return this._pauseStart;
+  get pauseStart(): string {
+    return <string>this._pauseStart;
   }
 
-  set pauseStart(value: number) {
+  set pauseStart(value: string) {
     this._pauseStart = value;
   }
 
-  get pauseFinish(): number {
-    return this._pauseFinish;
+  get pauseFinish(): string {
+    return <string>this._pauseFinish;
   }
 
-  set pauseFinish(value: number) {
+  set pauseFinish(value: string) {
     this._pauseFinish = value;
   }
 
-  get startingHour(): number {
-    return this._startingHour;
+  get startingHour(): string {
+    return <string>this._startingHour;
   }
 
-  set startingHour(value: number) {
+  set startingHour(value: string) {
     this._startingHour = value;
   }
 
-  get finishingHour(): number {
-    return this._finishingHour;
+  get finishingHour(): string {
+    return <string>this._finishingHour;
   }
 
-  set finishingHour(value: number) {
+  set finishingHour(value: string) {
     this._finishingHour = value;
   }
 

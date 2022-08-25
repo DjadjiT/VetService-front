@@ -61,17 +61,16 @@ export class MockService{
       "Paris",
       "France",
       12345657,
-      new Schedule(
-        7,12 , 14,18,
-        [
-          true,
-          true,
-          true,
-          true,
-          true,
-          false,
-          false,
-        ]
+      new Schedule([
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false,
+      ],
+        "08:00","14:00" , "14:00","19:00",
       ),
       true,
     )
@@ -105,9 +104,7 @@ export class MockService{
       "Paris",
       "France",
       12345657,
-      new Schedule(
-        7,12 , 14,18,
-        [
+      new Schedule([
           true,
           false,
           true,
@@ -115,7 +112,8 @@ export class MockService{
           true,
           false,
           false,
-        ]
+        ],
+        "08:12","14:00" , "16:00","19:00"
       ),
       false,
     )

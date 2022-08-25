@@ -106,3 +106,10 @@
 .working_days{
   margin: 10px;
 }
+
+.hours{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}

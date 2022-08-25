@@ -30,9 +30,9 @@ export class ProfilePageComponent implements OnInit {
   profile : User;
   healthRecord: HealthRecord[]
 
-  schedule: Schedule
+  scheduleForm: FormGroup
 
-  time = {hour: 13, minute: 30};
+  test: string = ""
 
   constructor(private formBuilder: FormBuilder,
               public dialog: MatDialog,
@@ -92,18 +92,12 @@ export class ProfilePageComponent implements OnInit {
     }
     this.maxDate = new Date();
 
-    console.log(this.healthRecord);
-
-    this.schedule = new Schedule(8,12,14,18,
-      [
-        true,
-        true,
-        true,
-        true,
-        true,
-        false,
-        false,
-      ])
+    this.scheduleForm = this.formBuilder.group({
+      start: [this.profile.schedule.startingHour, [Validators.required]],
+      pause: [this.profile.schedule.pauseStart, [Validators.required]],
+      endPause: [this.profile.schedule.pauseFinish, [Validators.required]],
+      end: [this.profile.schedule.finishingHour, [Validators.required]],
+    });
   }
 
 
@@ -118,6 +112,19 @@ export class ProfilePageComponent implements OnInit {
   canSave(){
     console.log(this.form)
     this.openSnackBar('Votre profil a été modifié avec succès !');
+
+    if(this.profile.role=="client"){
+
+    }else if(this.profile.role=="veterinary"){
+
+      this.profile.schedule.startingHour = this.scheduleForm.get("start")?.value
+      this.profile.schedule.pauseStart = this.scheduleForm.get("pause")?.value
+      this.profile.schedule.pauseFinish = this.scheduleForm.get("endPause")?.value
+      this.profile.schedule.finishingHour = this.scheduleForm.get("end")?.value
+
+      console.log(this.profile)
+    }
+
   }
 
   deleteRecord(id: number){
