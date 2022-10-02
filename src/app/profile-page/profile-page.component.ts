@@ -70,6 +70,12 @@ export class ProfilePageComponent implements OnInit {
         password: [this.profile.password, [Validators.required, Validators.minLength(5)]],
         gender: [this.profile.gender, [Validators.required]],
       });
+      this.scheduleForm = this.formBuilder.group({
+        start: ["", [Validators.required]],
+        pause: ["", [Validators.required]],
+        endPause: ["", [Validators.required]],
+        end: ["", [Validators.required]],
+      });
     }
     else{
       this.form = this.formBuilder.group({
@@ -89,15 +95,15 @@ export class ProfilePageComponent implements OnInit {
         rpps: [this.profile.rpps, [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
         notes: [this.profile.informations.informations, []]
       });
+
+      this.scheduleForm = this.formBuilder.group({
+        start: [this.profile.schedule.startingHour, [Validators.required]],
+        pause: [this.profile.schedule.pauseStart, [Validators.required]],
+        endPause: [this.profile.schedule.pauseFinish, [Validators.required]],
+        end: [this.profile.schedule.finishingHour, [Validators.required]],
+      });
     }
     this.maxDate = new Date();
-
-    this.scheduleForm = this.formBuilder.group({
-      start: [this.profile.schedule.startingHour, [Validators.required]],
-      pause: [this.profile.schedule.pauseStart, [Validators.required]],
-      endPause: [this.profile.schedule.pauseFinish, [Validators.required]],
-      end: [this.profile.schedule.finishingHour, [Validators.required]],
-    });
   }
 
 
