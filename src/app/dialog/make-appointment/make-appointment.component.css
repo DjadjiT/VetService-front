@@ -1,0 +1,29 @@
+.app_dialog {
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+  width: 800px;
+}
+.info_div {
+  white-space: nowrap;
+  overflow: hidden;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 5px;
+  width: 700px;
+}
+
+.validate_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #00AA55;
+}
+
+.app_input{
+  width: 40vw;
+}

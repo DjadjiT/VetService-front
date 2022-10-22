@@ -1,0 +1,17 @@
+
+<div class="store_content">
+  <ng-container *ngFor="let prod of productList">
+    <mat-card class="product">
+      <mat-card-title-group>
+        <mat-card-title>{{prod.name}}</mat-card-title>
+        <img mat-card-md-image [src]="prod.images[0]" >
+      </mat-card-title-group>
+      <mat-card-content>
+        {{prod.description}}
+      </mat-card-content>
+      <mat-card-actions class="button_div">
+        <button mat-button class="buy_button" (click)="buy(prod)">Acheter pour {{prod.price.unit_amount}} €</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>

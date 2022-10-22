@@ -1,0 +1,51 @@
+
+<h2 style="margin: 30px">Rendez-vous à venir</h2>
+<div class="list">
+  <div *ngFor="let a of appointementList">
+    <mat-card class="appointement">
+      <mat-card-title style="text-align: center">
+        {{formatDateLocaleDateString(a.date)}}
+      </mat-card-title>
+      <mat-card-subtitle style="margin:10px 0">
+        Rendez vous avec le Dr. {{a.veterinary.lastName}} <br>
+        <p style="font-style: italic">{{a.veterinary.speciality}}</p>
+      </mat-card-subtitle>
+      <mat-card-content>
+        Motif de consultation : {{a.appointmentType}} <br> <br>
+        pour {{a.healthRecord.name}}
+      </mat-card-content>
+      <mat-card-actions class="btn_action">
+
+        <button mat-flat-button class="btn_postpone" (click)="openApointement(a)">
+          <mat-icon>info</mat-icon> Détails
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<h2 style="margin: 30px">Rendez-vous passés</h2>
+<div class="list">
+  <div *ngFor="let o of oldAppointementList">
+    <mat-card class="appointement">
+      <mat-card-title style="text-align: center">
+        {{formatDateLocaleDateString(o.date)}}
+      </mat-card-title>
+      <mat-card-subtitle style="margin:10px 0">
+        Rendez vous avec le Dr. {{o.veterinary.lastName}} <br>
+        <p style="font-style: italic">{{o.veterinary.speciality}}</p>
+      </mat-card-subtitle>
+      <mat-card-content>
+        Motif de consultation : {{o.appointmentType}} <br> <br>
+        pour {{o.healthRecord.name}}
+      </mat-card-content>
+      <mat-card-actions class="btn_action">
+
+        <button mat-flat-button class="btn_postpone" (click)="openApointement(o)">
+          <mat-icon>info</mat-icon> Détails
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+</div>

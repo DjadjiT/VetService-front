@@ -1,0 +1,90 @@
+
+.save_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #00AA55;
+}
+
+.add_element{
+  color: #fff;
+  font-size: 20px;
+  background-color: #00AA55;
+}
+
+
+.close_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #D02F27;
+}
+
+.dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.card{
+  width:30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.form{
+  display: flex;
+  width: 600px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.field{
+  width: 20vw;
+  margin: 10px;
+}
+
+.date_field{
+  width: 10vw;
+  margin: 10px;
+}
+
+.h1{
+  font-weight: bold;
+}
+
+.vaccin_name{
+  width: 25vw;
+}
+
+.vaccin_date{
+  flex-direction: row;
+}
+
+.right_side_dialog{
+  flex-grow: 1;
+}
+
+.vaccin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.rad_btn{
+  margin: 10px;
+}
+
+.delete {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #D02F27;
+}

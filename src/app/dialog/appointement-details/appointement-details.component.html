@@ -1,0 +1,183 @@
+<div class="dialog">
+  <div style="justify-content: center">
+    <h1 style="font-weight: bold">Detail du rendez-vous : {{formatDateLocaleDateString(app.date)}} </h1>
+  </div>
+  <mat-card class="card">
+    <mat-card-subtitle style="margin:10px 0">
+      <h3>Rendez vous avec le Dr. {{app.veterinary.lastName}} </h3>
+      <h3 style="font-style: italic">{{getSpeciality()}}</h3>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <h3><span style="text-decoration: underline">Motif de consultation</span> : {{app.appointmentType}} </h3>
+
+      <h3> <span style="text-decoration: underline"> Adresse du practicien</span> : <a href="{{getGMapLink()}}" >{{app.veterinary.street}} {{app.veterinary.postalCode}} {{app.veterinary.city}}, {{app.veterinary.country}}</a></h3>
+
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-content>
+      <h2>Carnet de santé de : {{app.healthRecord.name}}</h2>
+
+      <div style="margin: 10px">
+        <p> Type : {{app.healthRecord.type}}</p>
+        <p> Race : {{app.healthRecord.race}}</p>
+        <p> Sexe : {{app.healthRecord.sex}}</p>
+        <p> Née le: {{formatDateLocaleDateStringWithouthours(app.healthRecord.birthDate)}}</p>
+        <p> Stéréliser/Castrer : {{getSterilisedCatrate()}}</p>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div style="margin: 10px">
+
+        <div *ngIf="(isVet && isOpen); else isNotVet" >
+
+          <h2 style="font-weight: bold">Vaccin</h2>
+
+          <ng-container [formGroup]="hrForm">
+
+            <ng-container formArrayName="vaccins">
+              <ng-container *ngFor="let vaccinControl of vaccins.controls; index as i">
+                <div [formGroupName]="i" class="vaccin">
+                  <div>
+                    <mat-form-field
+                      class="field"
+                      appearance="outline">
+                      <mat-label>Nom du vaccin</mat-label>
+                      <input matInput placeholder="Nom du vaccin" formControlName="name" required>
+                    </mat-form-field>
+
+                    <mat-form-field
+                      class="field"
+                      appearance="outline" >
+                      <mat-label>Date du vaccin </mat-label>
+                      <input formControlName="dateVaccin"  [min]="app.healthRecord.birthDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required>
+                      <mat-hint>JJ/MM/AAAA</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field
+                      class="field"
+                      appearance="outline" >
+                      <mat-label>Date de rappel du vaccin </mat-label>
+                      <input formControlName="dateRecall" [min]="maxDate" matInput [matDatepicker]="picker2" readonly>
+                      <mat-hint>JJ/MM/AAAA</mat-hint>
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <button mat-stroked-button (click)="removeVaccinFromList(i)" style="margin: 20px">
+                    <mat-icon [ngStyle]="{'color':'#D02F27'}">remove_circle_outline</mat-icon>
+                    Supprimer ce vaccin
+                  </button>
+                </div>
+                <mat-divider [inset]="true"></mat-divider>
+              </ng-container>
+            </ng-container>
+
+            <button mat-stroked-button class="btn_postpone" (click)="addVaccin()" style="margin: 20px">
+              <mat-icon>add_circle_outline</mat-icon> Ajouter un vaccin
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <h2 style="font-weight: bold">Notes complémentaires </h2>
+
+            <ng-container formArrayName="notes">
+              <ng-container *ngFor="let noteControl of notes.controls; index as i">
+                <div [formGroupName]="i" class="newNotes">
+                  <div>
+                    <mat-form-field
+                      style="width: 400px"
+                      appearance="outline">
+                      <mat-label>Nouvelle note</mat-label>
+                      <input matInput placeholder="Informations de la note" formControlName="informations" required>
+                    </mat-form-field>
+
+                    <div></div>
+                  </div>
+
+                  <button mat-stroked-button (click)="removeNotesFromList(i)" style="margin: 20px">
+                    <mat-icon [ngStyle]="{'color':'#D02F27'}">remove_circle_outline</mat-icon>
+                    Supprimer cette note
+                  </button>
+                </div>
+                <mat-divider [inset]="true"></mat-divider>
+              </ng-container>
+            </ng-container>
+
+            <button mat-stroked-button class="btn_postpone" (click)="addNotes()" style="margin: 20px">
+              <mat-icon>add_circle_outline</mat-icon> Ajouter une note
+            </button>
+          </ng-container>
+        </div>
+        <ng-template #isNotVet>
+
+          <h2 style="font-weight: bold;">Vaccin</h2>
+          <div *ngFor="let v of app.healthRecord.vaccins">
+            <p>Nom du vaccin : {{v.name}}</p>
+            <p>Vaccin fait le : {{formatDateLocaleDateString(v.dateVaccin)}}</p>
+            <p *ngIf="v.dateRecall != null">Vaccin de rappel à faire le : {{formatDateLocaleDateString(v.dateRecall)}}</p>
+            <mat-divider [inset]="true"></mat-divider>
+          </div>
+          <mat-divider></mat-divider>
+
+          <h2 style="font-weight: bold; margin: 10px">Notes complémentaires </h2>
+          <div *ngFor="let n of app.healthRecord.notes">
+            <p>Notes : {{n.informations}}</p>
+            <p>Crée le  : {{formatDateLocaleDateString(n.date)}}</p>
+            <mat-divider [inset]="true"></mat-divider>
+          </div>
+        </ng-template>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+  <span style="margin: 10px">Rendez vous pris le : {{formatDateLocaleDateString(app.requestDate)}}</span>
+
+  <div mat-dialog-actions class="bottom_btn" *ngIf="isOpen">
+    <button *ngIf="(isVet && isOpen)" mat-stroked-button class="btn_postpone" style="margin: 20px" (click)="saveHealthRecord()">
+      <mat-icon>pets</mat-icon> Enregistrer le carnet de santé
+    </button>
+
+    <div class="btn_action">
+      <button mat-stroked-button class="btn_cancel" (click)="deleteAppointment()">
+        <mat-icon>close</mat-icon> Annuler le rendez-vous
+      </button>
+
+      <button mat-stroked-button class="btn_postpone" (click)="changeDate = !changeDate">
+        <mat-icon>update</mat-icon> Déplacer le rendez-vous
+      </button>
+    </div>
+
+    <div [hidden]="!changeDate" class="dispoList_div">
+
+      <mat-divider></mat-divider>
+
+      <mat-form-field
+        appearance="outline" >
+        <mat-label>Date </mat-label>
+        <input [(ngModel)]="newDate" [min]="maxDate" matInput [matDatepicker]="picker2" readonly (ngModelChange)="updateDispoList()">
+        <mat-hint>JJ/MM/AAAA</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+
+      <div class="dispoList_div">
+        <button mat-stroked-button class="hours_card" *ngFor="let dispo of vetDispoList" (click)="putAppointment(dispo)">
+          {{getDateStr(dispo)}}
+        </button>
+      </div>
+    </div>
+
+    <button mat-stroked-button class="close_btn" (click)="closeDialog()">Fermer</button>
+  </div>
+
+</div>

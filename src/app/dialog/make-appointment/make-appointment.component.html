@@ -1,0 +1,41 @@
+<div class="app_dialog" [formGroup]="appointmentForm">
+  <h1 style="font-weight: bold">Prise de rendez-vous pour le : {{formatDateLocaleDateString(date)}} </h1>
+
+  <mat-divider style="margin: 10px 0; width: 80vw"></mat-divider>
+
+  <div>
+    <h3>Dr.{{veterinary.lastName}} {{veterinary.firstName}} </h3>
+    <h3>
+      <mat-icon style="margin-right: 3px" matTooltip="Adresse mail"> contact_mail</mat-icon> {{veterinary.email}}
+      <br>
+      <mat-icon style="margin-right: 3px" matTooltip="Numéro de téléphone"> contact_phone</mat-icon> {{veterinary.phoneNb}}
+      <br>
+      <mat-icon style="margin-right: 3px" matTooltip="Adresse postale"> location_on</mat-icon><a href="{{getGMapLink(veterinary)}}">{{veterinary.street}} {{veterinary.postalCode}} {{veterinary.city}} {{veterinary.country}}</a>
+    </h3>
+  </div>
+
+  <mat-divider style="margin: 10px 0; width: 80vw"></mat-divider>
+
+    <mat-form-field appearance="outline" class="app_input">
+      <mat-label>Pour quelle animal faites vous le rendez vous ?</mat-label>
+      <mat-select formControlName="healthRecord" required>
+        <mat-option *ngFor="let hr of hrList" [value]="hr.id">
+          {{hr.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="app_input">
+      <mat-label>Quelle est le motif de votre rendez vous ?</mat-label>
+      <mat-select formControlName="appointmentType" required >
+        <mat-option *ngFor="let app of appointmentTypeList" [value]="app">
+          {{app}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button mat-stroked-button class="validate_btn" (click)="validate()" [disabled]="!appointmentForm.valid">
+      Valider
+    </button>
+</div>

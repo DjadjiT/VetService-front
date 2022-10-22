@@ -27,4 +27,10 @@ export const SPECIALITYLIST: string[] = [
 
 export const gender: string[] =  ['Monsieur','Madame', 'Autre']
 
-export const paymentMethod: string[] = ["Carte Bancaire", "Espèce", "Chèque"];
+export const paymentMethod: string[] = ["Carte Bancaire", "Espece", "Cheque"];
+
+export const frequencyList = [
+  {type: "daily" , value: 'quotidien'},
+  {type: "weekly", value: 'hebdomadaire'},
+  {type: "monthly", value: 'mensuel'},
+];

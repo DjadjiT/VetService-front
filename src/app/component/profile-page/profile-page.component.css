@@ -1,0 +1,139 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.form{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn {
+  padding: 10px;
+  color: #00AA55;
+  font-size: 20px;
+}
+
+.inside_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #00AA55;
+}
+
+.input {
+  width: 40vw;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.mat_center{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mat_title{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.health_record{
+  width: 40vw;
+  margin-top: 30px;
+}
+
+.health_record_info{
+  padding: 30px;
+}
+
+.header-image {
+  background-image: url('https://cdn-icons.flaticon.com/png/512/1067/premium/1067866.png?token=exp=1658872312~hmac=b862851342e8d543b7951fe230145cd7');
+  background-size: cover;
+}
+
+
+.delete_btn {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #D02F27;
+}
+
+.logout {
+  padding: 5px 20px;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #D02F27;
+}
+
+.btn_action{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.address{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.address_input{
+  width: 18vw;
+  margin: 10px;
+}
+
+.schedule{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.invoices{
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.planning_days{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.working_days{
+  margin: 10px;
+}
+
+.hours{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.checkbox_pm {
+  margin:5px 10px
+}
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

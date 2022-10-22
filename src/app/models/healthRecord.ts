@@ -2,7 +2,7 @@ import {Vaccin} from "./vaccin";
 import {Note} from "./note";
 
 export class HealthRecord {
-  private _id?: number
+  private _id?: string
   private _type: string
   private _name: string
   private _race?: string
@@ -11,9 +11,10 @@ export class HealthRecord {
   private _birthDate: Date
   private _vaccins?: Vaccin[]
   private _notes?: Note[]
+  private _deleted?: boolean
 
 
-  constructor(type: string, name: string, race: string, sex: string, sterilised: boolean, birthDate: Date, id?: number, vaccins?: Vaccin[], notes?: Note[]) {
+  constructor(type: string, name: string, race: string, sex: string, sterilised: boolean, birthDate: Date, id?: string, vaccins?: Vaccin[], notes?: Note[], deleted?: boolean) {
     this._id = id;
     this._type = type;
     this._name = name;
@@ -23,6 +24,7 @@ export class HealthRecord {
     this._birthDate = birthDate;
     this._vaccins = vaccins;
     this._notes = notes;
+    this._deleted = deleted;
   }
 
   get type(): string {
@@ -82,11 +84,11 @@ export class HealthRecord {
     this._notes = value;
   }
 
-  get id(): number {
-    return <number>this._id;
+  get id(): string {
+    return <string>this._id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this._id = value;
   }
 
@@ -96,5 +98,13 @@ export class HealthRecord {
 
   get notes(): Note[] {
     return <Note[]>this._notes;
+  }
+
+  get deleted(): boolean {
+    return <boolean>this._deleted;
+  }
+
+  set deleted(value: boolean) {
+    this._deleted = value;
   }
 }

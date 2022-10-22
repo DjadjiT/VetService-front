@@ -1,0 +1,95 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  width: 100vw;
+}
+
+.search_form {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+}
+
+.result_list {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+  gap: 10px;
+}
+
+.payment_row {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.search_bar_div {
+  width: 30vw;
+  margin: 10px;
+}
+
+.small_search_bar {
+  width: 7vw;
+  margin: 10px;
+}
+
+.city_search_bar {
+  width: 13vw;
+  margin: 10px;
+}
+
+
+.search_button {
+  margin: 10px;
+  padding: 5px 20px;
+  font-size: 15px;
+  color: white;
+  background-color: #00AA55;
+}
+
+.vet_card{
+  flex: 1;
+  width: 20vw;
+  overflow-wrap: break-word;
+
+}
+
+.vet_center{
+  justify-content: center;
+  align-items: center;
+  max-width: fit-content;
+}
+
+.gmap{
+  max-width: 10ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hours_card{
+  background-color: #00AA55;
+  color: white;
+  margin: 5px;
+}
+
+.dispoList_div {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.payment_elem {
+  margin-right: 10px;
+  size: 10px;
+}

@@ -2,6 +2,7 @@ import {Note} from "./note";
 import {Schedule} from "./Schedule";
 
 export class User {
+  private _id: string
   private _role: string
   private _birthDate: Date
   private _email: string
@@ -9,9 +10,8 @@ export class User {
   private _lastName: string
   private _phoneNb: string
   private _password?: string
-  private _gender?: string
   private _speciality?: string
-  private _appointementType?: string[]
+  private _appointmentType?: string[]
   private _paymentMethod?: string[]
   private _informations?: Note
   private _institutionName?: string
@@ -22,13 +22,16 @@ export class User {
   private _rpps?: number
   private _schedule?: Schedule
   private _active?: boolean
+  private _healthRecords?: any[]
+  private _customerId?: string
 
-  constructor(role: string,birthDate: Date, email: string, firstName: string, lastName: string,
-              phoneNb: string, password: string, gender: string | undefined, speciality: string | undefined,
-              appointementType: string[] | undefined, paymentMethod: string[] | undefined,
+  constructor(_id: string,role: string,birthDate: Date, email: string, firstName: string, lastName: string,
+              phoneNb: string, password: string, speciality: string | undefined,
+              appointmentType: string[] | undefined, paymentMethod: string[] | undefined,
               informations: Note | undefined, _institutionName: string | undefined, street: string | undefined, postalCode: string | undefined,
               city: string | undefined, country: string | undefined, rpps: number | undefined,
-              schedule: Schedule | undefined, active: boolean | undefined) {
+              schedule: Schedule | undefined, active: boolean | undefined, healthRecords: any[] | undefined, customerId: string | undefined) {
+    this._id = _id;
     this._role = role;
     this._birthDate = birthDate;
     this._email = email;
@@ -36,9 +39,8 @@ export class User {
     this._lastName = lastName;
     this._phoneNb = phoneNb;
     this._password = password;
-    this._gender = gender;
     this._speciality = speciality;
-    this._appointementType = appointementType;
+    this._appointmentType = appointmentType;
     this._paymentMethod = paymentMethod;
     this._informations = informations;
     this._street = street;
@@ -49,6 +51,8 @@ export class User {
     this._schedule = schedule;
     this._active = active
     this._institutionName = _institutionName
+    this._healthRecords = healthRecords
+    this._customerId = customerId
   }
 
   get birthDate(): Date {
@@ -57,14 +61,6 @@ export class User {
 
   set birthDate(value: Date) {
     this._birthDate = value;
-  }
-
-  get gender(): string {
-    return <string>this._gender;
-  }
-
-  set gender(value: string) {
-    this._gender = value;
   }
 
   get street(): string {
@@ -179,12 +175,12 @@ export class User {
     this._schedule = value;
   }
 
-  get appointementType(): string[] {
-    return <string[]>this._appointementType;
+  get appointmentType(): string[] {
+    return <string[]>this._appointmentType;
   }
 
-  set appointementType(value: string[]) {
-    this._appointementType = value;
+  set appointmentType(value: string[]) {
+    this._appointmentType = value;
   }
 
   get role(): string {
@@ -211,5 +207,30 @@ export class User {
 
   set institutionName(value: string) {
     this._institutionName = value;
+  }
+
+  get healthRecords(): any[] {
+    return <any[]>this._healthRecords;
+  }
+
+  set healthRecords(value: any[]) {
+    this._healthRecords = value;
+  }
+
+  get id(): string {
+    return this._id;
+  }
+
+  set id(value: string) {
+    this._id = value;
+  }
+
+
+  get customerId(): string {
+    return <string>this._customerId;
+  }
+
+  set customerId(value: string) {
+    this._customerId = value;
   }
 }

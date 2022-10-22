@@ -1,0 +1,25 @@
+.store_content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+.product {
+  width: 400px;
+  margin: 20px;
+}
+
+.buy_button{
+  margin: 10px;
+  padding: 5px 20px;
+  font-size: 15px;
+  color: white;
+  background-color: #00AA55;
+}
+.button_div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

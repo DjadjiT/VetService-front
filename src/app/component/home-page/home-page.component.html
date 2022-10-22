@@ -1,0 +1,123 @@
+<div class="content">
+  <h1 >Trouvez un rendez-vous avec un vétérinaire</h1>
+  <div [formGroup]="searchForm" class="search_form">
+    <mat-form-field
+      class="search_bar_div"
+      appearance="outline">
+      <mat-label>Spécialité :</mat-label>
+      <input type="text"
+             placeholder="Entrez la spécialité rechercher"
+             matInput
+             formControlName="speciality"
+             [matAutocomplete]="auto"
+             required>
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchBar()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+    <mat-form-field
+      class="small_search_bar"
+      appearance="outline" >
+      <mat-label>Date </mat-label>
+      <input formControlName="date" [min]="maxDate" matInput [matDatepicker]="picker2" readonly required>
+      <mat-hint>JJ/MM/AAAA</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field
+      class="city_search_bar"
+      appearance="outline">
+      <mat-label>Ville</mat-label>
+      <input formControlName="city" matInput required>
+    </mat-form-field>
+
+    <mat-form-field
+      class="small_search_bar"
+      appearance="outline">
+      <mat-label>Code Postal</mat-label>
+      <input formControlName="postalCode" matInput maxlength="5">
+      <mat-hint align="end">{{getPostalCodeLength()}} / 5</mat-hint>
+    </mat-form-field>
+
+  </div>
+
+
+  <button mat-stroked-button class="search_button" (click)="search()" [disabled]="!this.searchForm.valid">
+    Lancer la recherche
+  </button>
+
+  <mat-divider style="margin: 10px 0; width: 80vw"></mat-divider>
+
+  <div class="result_list" *ngIf="!loading; else loadScreen">
+    <h2 *ngIf="result.length==0">
+      Aucun vétérinaire ne correspond à vos critères.
+    </h2>
+
+    <div *ngFor="let res of result">
+      <mat-card class="vet_card">
+        <mat-card-header class="vet_center">
+          <mat-card-title>Dr.{{res.vet.lastName}} {{res.vet.firstName}}</mat-card-title>
+          <mat-card-subtitle>
+            <mat-icon style="margin-right: 3px" matTooltip="Adresse mail"> contact_mail</mat-icon> {{res.vet.email}}
+            <br>
+            <mat-icon style="margin-right: 3px" matTooltip="Numéro de téléphone"> contact_phone</mat-icon> {{res.vet.phoneNb}}
+            <br>
+            <mat-icon style="margin-right: 3px" matTooltip="Adresse postale"> location_on</mat-icon><a href="{{getGMapLink(res.vet)}}">{{res.vet.street}} {{res.vet.postalCode}} {{res.vet.city}} {{res.vet.country}}</a>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <h4><span style="text-decoration: underline">Specialité</span> : {{res.vet.speciality}}</h4>
+          <h3><span style="text-decoration: underline">Paiement accepté</span> :</h3>
+
+          <div class="payment_row">
+            <div [hidden]="!isPaymentPresent('espece', res.vet)">
+              <span matTooltip="Espèce" class="payment_elem">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" />
+                </svg>
+              </span>
+            </div>
+
+            <div [hidden]="!isPaymentPresent('carte bancaire', res.vet)">
+              <mat-divider [vertical]="true"></mat-divider>
+            <span matTooltip="Carte bancaire" class="payment_elem">
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M21,8V6H7V8H21M21,16V11H7V16H21M21,4A2,2 0 0,1 23,6V16A2,2 0 0,1 21,18H7C5.89,18 5,17.1 5,16V6C5,4.89 5.89,4 7,4H21M3,20H18V22H3A2,2 0 0,1 1,20V9H3V20Z" />
+              </svg>
+            </span>
+            </div>
+
+            <div [hidden]="!isPaymentPresent('cheque', res.vet)">
+              <mat-divider [vertical]="true"></mat-divider>
+              <span matTooltip="Chèque" class="payment_elem">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19.7 12.9L14 18.6H11.7V16.3L17.4 10.6L19.7 12.9M23.1 12.1C23.1 12.4 22.8 12.7 22.5 13L20 15.5L19.1 14.6L21.7 12L21.1 11.4L20.4 12.1L18.1 9.8L20.3 7.7C20.5 7.5 20.9 7.5 21.2 7.7L22.6 9.1C22.8 9.3 22.8 9.7 22.6 10C22.4 10.2 22.2 10.4 22.2 10.6C22.2 10.8 22.4 11 22.6 11.2C22.9 11.5 23.2 11.8 23.1 12.1M3 20V4H10V9H15V10.5L17 8.5V8L11 2H3C1.9 2 1 2.9 1 4V20C1 21.1 1.9 22 3 22H15C16.1 22 17 21.1 17 20H3M11 17.1C10.8 17.1 10.6 17.2 10.5 17.2L10 15H8.5L6.4 16.7L7 14H5.5L4.5 19H6L8.9 16.4L9.5 18.7H10.5L11 18.6V17.1Z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <h3><span style="text-decoration: underline">Disponibilité</span> :</h3>
+
+          <div class="dispoList_div">
+            <button mat-stroked-button class="hours_card" *ngFor="let dispo of res.dispoList" (click)="openDialog(dispo, res.vet)">
+              {{getDateStr(dispo)}}
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #loadScreen>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>
