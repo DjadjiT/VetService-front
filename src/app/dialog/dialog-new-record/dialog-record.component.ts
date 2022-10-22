@@ -100,8 +100,10 @@ export class DialogRecordComponent implements OnInit {
     this.hrService.postHealthRecord(hr).subscribe(data => {
       this.toastService.showMessage("Le carnet de santé a été ajouté avec succès!")
 
-      this.router.navigate(["/profile"])
       this.dialogRef.close()
+      this.router.navigate(["/profile"]).then(() => {
+          window.location.reload();
+        });
     }, err => {
       this.toastService.showMessage("Une erreur a eu lieu, pendant l'enregistrement de votre carnet de sauté!")
       this.dialogRef.close()
@@ -115,7 +117,9 @@ export class DialogRecordComponent implements OnInit {
     this.hrService.putHealthRecord(hr).subscribe(data => {
       this.toastService.showMessage("Le carnet de santé a été modifié avec succès!")
 
-      this.router.navigate(["/profile"])
+      this.router.navigate(["/profile"]).then(() => {
+          window.location.reload();
+        });
       this.dialogRef.close()
     }, err => {
       this.toastService.showMessage("Une erreur a eu lieu, pendant l'enregistrement de votre carnet de sauté!")

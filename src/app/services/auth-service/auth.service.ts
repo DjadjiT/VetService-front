@@ -22,7 +22,9 @@ export class AuthService {
       ).subscribe(data => {
         this.saveToken(data.token)
         this.showToaster("Bienvenue, vous êtes connecté!")
-        this.router.navigate(['/'])
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
 
     },
     err => {
@@ -57,7 +59,9 @@ export class AuthService {
     ).subscribe(data => {
         this.saveToken(data.result)
         this.showToaster("Bienvenue, vous êtes connecté!")
-        this.router.navigate(['/'])
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
       },
       err => {
         console.log(err)
@@ -94,7 +98,9 @@ export class AuthService {
     ).subscribe(data => {
         this.saveToken(data.result)
         this.showToaster("Bienvenue, vous êtes connecté!")
-        this.router.navigate(['/'])
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
       },
       err => {
         console.log(err)

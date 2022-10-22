@@ -29,7 +29,9 @@ export class AuthGuardGuard implements CanActivate {
     let header = this.authService.getAuthorizationHeadersWithToken()
     await this.http.get<boolean>(this.baseUrl + "/user", {headers: header}).toPromise().catch(err => {
       localStorage.removeItem("token")
-      this.router.navigate(["/login"])
+      this.router.navigate(["/login"]).then(() => {
+        window.location.reload();
+      });
     })
 
     return true

@@ -235,10 +235,14 @@ export class ProfilePageComponent implements OnInit {
     this.hrService.deleteHealthRecord(this.healthRecord[id].id)
       .subscribe(data => {
         this.toastService.showMessage("Votre carnet de santé a été supprimé!")
-        this.router.navigate(["/profile"])
+        this.router.navigate(["/profile"]).then(() => {
+          window.location.reload();
+        });
       }, err => {
         this.toastService.showMessage("Il y a eu une erreur lors de la suppression du carnet de santé!")
-        this.router.navigate(["/profile"])
+        this.router.navigate(["/profile"]).then(() => {
+          window.location.reload();
+        });
       })
 
   }
@@ -305,7 +309,9 @@ export class ProfilePageComponent implements OnInit {
 
   logout(){
     this.authService.logout()
-    this.router.navigate(['/'])
+    this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
   }
 
   createSession(){
