@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  proxy : "",
-  baseUrl: "Vetservicesbackeb-env.eba-enp6yzu3.eu-west-3.elasticbeanstalk.com",
+  proxy : "/api/",
+  baseUrl: "http://localhost:8080",
   subKey: "price_1LJDtCK6LFtOfBbROeMdH0Ot"
 };
 
