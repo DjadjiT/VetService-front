@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   proxy : "",
-  baseUrl: "http://vetservicesbackeb-env.eba-enp6yzu3.eu-west-3.elasticbeanstalk.com/",
+  baseUrl: "https://vetservice-back.link",
   subKey: "price_1LJDtCK6LFtOfBbROeMdH0Ot"
 };
