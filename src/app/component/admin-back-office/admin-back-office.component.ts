@@ -13,6 +13,7 @@ import {StripeService} from "../../services/stripe-service/stripe.service";
 import {Newsletter} from "../../models/Newsletter";
 import { frequencyList } from 'src/app/models/Constant';
 import {NewsletterService} from "../../services/newsletter-service/newsletter.service";
+import {DateService} from "../../services/DateService";
 
 @Component({
   selector: 'app-admin-back-office',
@@ -46,6 +47,10 @@ export class AdminBackOfficeComponent implements OnInit {
       this.adminList = data.adminList
       this.vetToValidate = data.invalidVetList
       this.vetList = data.vetList
+      this.newsletterList = data.newsletterList
+      this.newsletterList.sort((a,b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
     });
 
     this.adminForm = this.formBuilder.group({
@@ -56,11 +61,11 @@ export class AdminBackOfficeComponent implements OnInit {
     });
 
     this.newsletterForm = this.formBuilder.group({
-      frequency : ['', [Validators.required]],
       message: ['', [Validators.required]],
       object: ['', [Validators.required]],
       receiver : ['', [Validators.required]],
     });
+
 
   }
 
@@ -93,10 +98,10 @@ export class AdminBackOfficeComponent implements OnInit {
     });
   }
 
-
   removeFromAdmin(admin: User){
     this.userService.deleteUserById(admin.id).subscribe(data => {
       this.toastService.showMessage("Vous avez bien supprimé ce compte admin de VetService.")
+      window.location.reload();
     })
   }
 
@@ -114,6 +119,7 @@ export class AdminBackOfficeComponent implements OnInit {
 
     this.authService.registerAdmin(body).subscribe(data => {
         this.toastService.showMessage("Le compte admin a bien été créer!")
+        window.location.reload();
       },
       err => {
         console.log(err)
@@ -124,7 +130,6 @@ export class AdminBackOfficeComponent implements OnInit {
         }
       })
   }
-
 
   openVetInfo(vet: User){
     this.appointmentService.getAppointmentByUserId(vet.id).subscribe(data => {
@@ -151,22 +156,24 @@ export class AdminBackOfficeComponent implements OnInit {
 
   postNewsletter(){
     let body = new Newsletter(
-      this.adminForm.get("frequency")?.value,
-      this.adminForm.get("message")?.value,
-      this.adminForm.get("object")?.value,
-      this.adminForm.get("receiver")?.value,
-      undefined)
+      this.newsletterForm.get("message")?.value,
+      this.newsletterForm.get("object")?.value,
+      this.newsletterForm.get("receiver")?.value)
 
     this.newsletterService.postNewsletter(body).subscribe(data => {
       console.log(data)
-        this.toastService.showMessage("La newsletter a bien été enregistré!")
+        this.toastService.showMessage("La newsletter a bien été envoyé!")
       },
       err => {
         console.log(err)
         this.toastService.showMessage("Impossible d'enregistrer la newsletter, veuillez réessayer plus tard!")
       })
   }
-}{
+
+  formatDateLocaleDateString(date: Date): string{
+    date = new Date(date)
+    return DateService.formatDateLocaleDateString(date)
+  }
 
 }
 

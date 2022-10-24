@@ -14,37 +14,22 @@ export class NewsletterService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getNewsletter(newsletterid: string): Observable<Newsletter>{
-    let header = this.authService.getAuthorizationHeadersWithToken()
-    return this.http.get<Newsletter>(this.baseUrl+"/"+newsletterid, {headers: header}).pipe()
-  }
-
   deleteNewsletter(newsletterid: string): Observable<Newsletter>{
     let header = this.authService.getAuthorizationHeadersWithToken()
     return this.http.delete<Newsletter>(this.baseUrl+"/"+newsletterid, {headers: header}).pipe()
   }
-  getAllNewsletter(): Observable<Newsletter>{
+  getAllNewsletter(): Observable<Newsletter[]>{
     let header = this.authService.getAuthorizationHeadersWithToken()
-    return this.http.get<Newsletter>(this.baseUrl, {headers: header}).pipe()
+    return this.http.get<Newsletter[]>(this.baseUrl, {headers: header}).pipe()
   }
 
   postNewsletter(newsletter: Newsletter): Observable<Newsletter>{
     let header = this.authService.getAuthorizationHeadersWithToken()
     return this.http.post<Newsletter>(this.baseUrl, {
-      frequency: newsletter.frequency,
       message: newsletter.message,
       object: newsletter.object,
       receiver: newsletter.receiver,
     },{headers: header}).pipe()
   }
 
-  putNewsletter(newsletter: Newsletter): Observable<Newsletter>{
-    let header = this.authService.getAuthorizationHeadersWithToken()
-    return this.http.put<Newsletter>(this.baseUrl, {
-      frequency: newsletter.frequency,
-      message: newsletter.message,
-      object: newsletter.object,
-      receiver: newsletter.receiver,
-    },{headers: header}).pipe()
-  }
 }

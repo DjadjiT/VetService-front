@@ -1,0 +1,29 @@
+<div class="not_found_content">
+  <img class="img_lost" src="assets/lost-svgrepo-com.svg">
+  <h1 style="font-weight: bold">Oops! Il semble que la page que vous recherchez n'existe pas.  </h1>
+  <h3>Vous pouvez utilisé les boutons présents dans la barre d'outils, ou utilisez liens utiles ci-dessous vers des pages du sites :</h3>
+
+  <button mat-button color="#0" routerLink="store">
+    <svg style="width:24px;height:24px;margin: 10px" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12,18H6V14H12M21,14V12L20,7H4L3,12V14H4V20H14V14H18V20H20V14M20,4H4V6H20V4Z" />
+    </svg> Boutique en ligne
+  </button>
+
+  <div [hidden]="!isConnected" class="page_div">
+    <button mat-button color="#0" routerLink="/admin" [hidden]="role!=='admin'" style="margin: 10px">
+      <mat-icon>security</mat-icon> Espace Administrateur
+    </button>
+    <button mat-button color="#0" routerLink="/appointement" style="margin: 10px">
+      <mat-icon>date_range</mat-icon> Mes rendez-vous
+    </button>
+    <button mat-button color="#0" routerLink="/profile" style="margin: 10px">
+      <mat-icon>person</mat-icon> Mon profil
+    </button>
+  </div>
+
+  <div [hidden]="isConnected" class="page_div">
+    <button mat-button class="pro" routerLink="/vet-signup" style="margin: 10px">Vous êtes un professionnel de santé ?</button>
+    <button mat-button class="connect" routerLink="/login" style="margin: 10px">Se connecter / S'inscrire</button>
+  </div>
+
+</div>

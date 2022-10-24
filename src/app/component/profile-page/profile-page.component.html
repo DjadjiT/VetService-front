@@ -42,16 +42,6 @@
 
           <mat-form-field
             class="input"
-            appearance="outline" >
-            <mat-label>Votre date de naissance </mat-label>
-            <input formControlName="birthDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required >
-            <mat-hint>JJ/MM/AAAA</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker" [attr.disabled]="editMode"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field
-            class="input"
             appearance="outline">
             <mat-icon matPrefix>person</mat-icon>
             <mat-label>Nom</mat-label>
@@ -135,12 +125,12 @@
 
   <div  *ngIf="profile.role=='veterinary'">
       <div class="center">
-        <div [hidden]="subscriptionPaid" *ngIf="!loading; else loadScreen">
+        <div [hidden]="subscriptionPaid" *ngIf="!loading; else loadScreen" class="center">
           <h2>Vous n'avez pas encore payer le forfait d'exercice ce fonction sur notre plateforme. <br>
             Veuillez payer le tarifs annuel qui est de : </h2>
           <h2 style="font-weight: bold" class="center">5360€ par an</h2>
-          <button (click)="createSession()">
-            Sub
+          <button mat-raised-button (click)="createSession()" class="sub_btn">
+            Prendre l'abonnement vétérinaire
           </button>
         </div>
 
@@ -201,23 +191,23 @@
           <div [formGroup]="scheduleForm">
             <div class="hours">
               <mat-form-field appearance="outline" style="margin: 10px">
-                <mat-label>Date de début de journée :</mat-label>
+                <mat-label>Heure de début de journée :</mat-label>
                 <input type="time" matInput name="week" min="09:00" max="18:00" required formControlName="start">
               </mat-form-field>
 
               <mat-form-field appearance="outline" style="margin: 10px">
-                <mat-label>Date de pause :</mat-label>
+                <mat-label>Heure de pause :</mat-label>
                 <input type="time" matInput name="week" min="09:00" max="18:00" required formControlName="pause">
               </mat-form-field>
             </div>
             <div class="hours">
               <mat-form-field appearance="outline" style="margin: 10px">
-                <mat-label>Date de fin de pause :</mat-label>
+                <mat-label>Heure de fin de pause :</mat-label>
                 <input type="time" matInput name="week" required formControlName="endPause">
               </mat-form-field>
 
               <mat-form-field appearance="outline" style="margin: 10px">
-                <mat-label>Date de fin de journée :</mat-label>
+                <mat-label>Heure de fin de journée :</mat-label>
                 <input type="time" matInput name="week" required formControlName="end">
               </mat-form-field>
             </div>
@@ -251,18 +241,6 @@
               <mat-label>Mot de passe</mat-label>
               <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required>
               <mat-hint align="start" >La taille minimale est de 5 caractères. </mat-hint>
-            </mat-form-field>
-
-
-
-            <mat-form-field
-              class="input"
-              appearance="outline">
-              <mat-label>Votre date de naissance </mat-label>
-              <input formControlName="birthDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required>
-              <mat-hint>JJ/MM/AAAA</mat-hint>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field

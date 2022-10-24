@@ -52,7 +52,6 @@ export class AuthService {
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
-        birthdate: body.birthDate,
         password: body.password,
         phoneNb: body.phoneNb
       }
@@ -81,7 +80,6 @@ export class AuthService {
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
-        birthdate: body.birthdate,
         password: body.password,
         phoneNb: body.phoneNb,
         speciality: body.speciality,
@@ -115,14 +113,14 @@ export class AuthService {
   }
 
   registerAdmin(body: any): Observable<User> {
+    let header = this.getAuthorizationHeadersWithToken()
     return this.http.post<User>(this.baseUrl+"/register/admin",
       {
         email: body.email,
         password: body.password,
         firstName: body.firstName,
         lastName: body.lastName
-      }
-    )
+      }, {headers: header})
   }
 
   verifyVet(id: string): Observable<any> {

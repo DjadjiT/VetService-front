@@ -24,7 +24,6 @@ export class ProfilePageComponent implements OnInit {
 
   speciality : string[] = SPECIALITYLIST;
   form: FormGroup;
-  maxDate: Date;
   submitted = false;
   hide : boolean = true;
   editMode : boolean = true;
@@ -65,7 +64,6 @@ export class ProfilePageComponent implements OnInit {
         email : [this.profile.email, [Validators.required, Validators.email]],
         firstName: [this.profile.firstName, [Validators.required]],
         lastName: [this.profile.lastName, [Validators.required]],
-        birthDate: [new Date(this.profile.birthDate), ],
         password : ["", [Validators.required, Validators.minLength(5)]],
         institutionName: [this.profile.institutionName, [Validators.required]],
         street : [this.profile.street, [Validators.required]],
@@ -94,7 +92,6 @@ export class ProfilePageComponent implements OnInit {
       })
 
       this.form.controls["email"].disable()
-      this.form.controls["birthDate"].disable()
 
       if(this.profile.schedule == undefined || this.profile.schedule.workingDay.length<7){
         this.profile.schedule = new Schedule([
@@ -146,28 +143,21 @@ export class ProfilePageComponent implements OnInit {
         email: [this.profile.email, [Validators.required, Validators.email]],
         firstName: [this.profile.firstName, [Validators.required]],
         lastName: [this.profile.lastName, [Validators.required]],
-        birthDate: [new Date(this.profile.birthDate), ],
         password: ["", [Validators.required, Validators.minLength(5)]],
       });
       this.form.controls["email"].disable()
-      this.form.controls["birthDate"].disable()
 
       this.scheduleForm = this.formBuilder.group({});
     }
-    this.maxDate = new Date();
   }
 
 
   ngOnInit(): void {
-    this.maxDate = new Date();
+
   }
 
   isPMpresent(checkBoxName: string){
     return this.profile.paymentMethod.includes( checkBoxName.toLowerCase())
-  }
-
-  getBirthDateLocale(){
-    return this.profile.birthDate.toLocaleDateString();
   }
 
   canSave() {
@@ -178,7 +168,6 @@ export class ProfilePageComponent implements OnInit {
         email: this.profile.email,
         firstName: this.form.get("firstName")?.value,
         lastName: this.form.get("lastName")?.value,
-        //birthdate: this.form.get("birthdate")?.value,
         password: this.form.get("password")?.value,
         phoneNb: this.form.get("phoneNb")?.value,
         speciality: this.form.get("speciality")?.value,
@@ -203,6 +192,7 @@ export class ProfilePageComponent implements OnInit {
       this.userService.putUser(body).subscribe(data => {
         this.userService.updateUserSchedule(this.profile.schedule).subscribe(data => {
           this.toastService.showMessage("Votre profil a bien été modifié.")
+          window.location.reload();
         }, err => {
           this.toastService.showMessage("Votre profil a bien été modifié mais votre planning n'as pas été pris en compte.")
         })
@@ -217,13 +207,13 @@ export class ProfilePageComponent implements OnInit {
         email: this.profile.email,
         firstName: this.form.get("firstName")?.value,
         lastName: this.form.get("lastName")?.value,
-        //birthdate: this.form.get("birthdate")?.value,
         password: this.form.get("password")?.value,
         phoneNb: this.form.get("phoneNb")?.value
       }
 
       this.userService.putUser(body).subscribe(data => {
         this.toastService.showMessage("Votre profil a bien été modifié.")
+        window.location.reload();
       }, err => {
         this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
       })
@@ -254,7 +244,7 @@ export class ProfilePageComponent implements OnInit {
     dialogConfig.data = {
       hr: this.healthRecord[id]
     }
-    dialogConfig.width = '800px';
+    dialogConfig.width = '900px';
     dialogConfig.height = '700px';
     dialogConfig.maxWidth = '80vw'
     dialogConfig.maxHeight= '80vh';
@@ -264,7 +254,7 @@ export class ProfilePageComponent implements OnInit {
 
   newRecord(){
     this.dialog.open(DialogRecordComponent, {
-      width: '700px',
+      width: '900px',
       height: '700px',
     });
   }

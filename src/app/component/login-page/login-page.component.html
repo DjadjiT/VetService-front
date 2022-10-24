@@ -83,16 +83,6 @@
 
         <mat-form-field
           class="input"
-          appearance="outline" >
-          <mat-label>Votre date de naissance </mat-label>
-          <input formControlName="birthDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required>
-          <mat-hint>JJ/MM/AAAA</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <mat-form-field
-          class="input"
           appearance="outline">
           <mat-icon matPrefix>person</mat-icon>
           <mat-label>Nom</mat-label>

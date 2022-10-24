@@ -21,10 +21,8 @@ export class UserDetailsComponent implements OnInit {
 
   appointmentList: Appointement[] = []
   invoiceList: Invoice[] = []
-  subscriptionPaid : boolean = false
 
-  constructor(public dialogRef: MatDialogRef<UserDetailsComponent>,
-              @Inject(MAT_DIALOG_DATA) data: any, private toastService: ToastService,
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private toastService: ToastService,
               private authService: AuthService, private stripeService: StripeService) {
     this.user = data.vet
     this.appointmentList = data.appointmentHistory
@@ -60,10 +58,6 @@ export class UserDetailsComponent implements OnInit {
     return this.isSubscriptionValid(inv)?"#00AA55":"#D02F27"
   }
 
-  closeDialog(){
-    this.dialogRef.close();
-  }
-
   getGMapLink(){
     return GoogleMapService.generateGoogleMapUri(this.user)
   }
@@ -78,11 +72,13 @@ export class UserDetailsComponent implements OnInit {
   deactivateVet(){
     this.authService.deVerifyVet(this.user.id).subscribe(data => {
         this.toastService.showMessage("Le compte vétérinaire a été désactivé!")
+        window.location.reload();
       },
       err => {
         console.log(err)
         if(err.status == 400){
           this.toastService.showMessage("Le vétérinaire ne correspond à aucun compte, veuillez réessayer ultérieurement!")
+
         }else{
           this.toastService.showMessage("Une erreur est survenue, veuillez réessayer ultérieurement!")
         }
@@ -96,6 +92,7 @@ export class UserDetailsComponent implements OnInit {
   validateVet(){
     this.authService.verifyVet(this.user.id).subscribe(data => {
         this.toastService.showMessage("Le compte vétérinaire a été activé!")
+        window.location.reload();
       },
       err => {
         console.log(err)

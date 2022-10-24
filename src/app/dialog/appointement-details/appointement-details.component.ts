@@ -11,6 +11,7 @@ import {ToastService} from "../../services/toast-service/toast.service";
 import {HealthRecordServiceService} from "../../services/healthRecord-service/health-record-service.service";
 import {HealthRecord} from "../../models/healthRecord";
 import {NoteService} from "../../services/NoteService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-appointement-details',
@@ -22,6 +23,7 @@ export class AppointementDetailsComponent implements OnInit {
   app : Appointement;
 
   vet!: User
+  role!: string
 
   isVet: boolean = true
   isOpen: boolean = false
@@ -40,8 +42,9 @@ export class AppointementDetailsComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AppointementDetailsComponent>,
               @Inject(MAT_DIALOG_DATA) data: any, private formBuilder: FormBuilder,
               private toastService: ToastService, private appointmentService: AppointmentServiceService,
-              private hrService: HealthRecordServiceService) {
+              private hrService: HealthRecordServiceService, private router: Router) {
     this.app = data.app
+    this.role = data.role
     this.hr = this.app.healthRecord
 
     console.log(this.app.healthRecord)
@@ -134,8 +137,10 @@ export class AppointementDetailsComponent implements OnInit {
 
   deleteAppointment(){
     this.appointmentService.deleteAppointmentById(this.app.id).subscribe(data => {
-
       this.toastService.showMessage("L'annulation de votre rendez-vous a été pris en compte!")
+      this.router.navigate(["/appointement"]).then(() => {
+        window.location.reload();
+      });
     }, err => {
       this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
     })

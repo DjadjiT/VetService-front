@@ -8,7 +8,6 @@
 
 
   <h2 style="text-decoration: underline">Informations du practicien :</h2>
-  <h3 *ngIf="user.birthDate!=null"><span style="font-weight: 500">Date de naissance :</span> {{formatDateLocaleDateString(user.birthDate)}} </h3>
   <h3><span style="font-weight: 500">Numéro de télephone :</span> {{user.phoneNb}} </h3>
   <h3 *ngIf="user.informations!=null"><span style="font-weight: 500">Informations complémentaire :</span> {{user.informations.informations}} </h3>
   <h3><span style="font-weight: 500">Numéror rpps :</span> {{user.rpps}} </h3>

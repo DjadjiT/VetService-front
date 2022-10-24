@@ -44,6 +44,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { MakeAppointmentComponent } from './dialog/make-appointment/make-appointment.component';
 import {NgxStripeModule} from "ngx-stripe";
 import { StoreComponent } from './component/store-component/store.component';
+import { PagenotfoundComponent } from './component/page-not-found/pagenotfound.component';
+import { FailComponent } from './component/fail/fail.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { StoreComponent } from './component/store-component/store.component';
     UserDetailsComponent,
     MakeAppointmentComponent,
     StoreComponent,
+    PagenotfoundComponent,
+    FailComponent,
   ],
   imports: [
     BrowserModule,

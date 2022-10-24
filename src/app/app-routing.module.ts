@@ -16,6 +16,9 @@ import {VetListResolver} from "./resolver/vetList/vet-list.resolver";
 import {InvalidVetResolver} from "./resolver/invalid-vet/invalid-vet.resolver";
 import {ProductListResolver} from "./resolver/product-list-resolver/product-list.resolver";
 import {StoreComponent} from "./component/store-component/store.component";
+import {PagenotfoundComponent} from "./component/page-not-found/pagenotfound.component";
+import {FailComponent} from "./component/fail/fail.component";
+import {NewsletterResolver} from "./resolver/newsletter-resolver/newsletter.resolver";
 
 const routes: Routes = [
   {
@@ -28,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: LoginPageComponent
+    component: LoginPageComponent,
   },
   {
     path: "store",
@@ -61,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: "vet-signup",
-    component: VetSignupPageComponent
+    component: VetSignupPageComponent,
   },
   {
     path : "admin",
@@ -73,9 +76,16 @@ const routes: Routes = [
     resolve: {
       adminList: AdminListResolver,
       vetList: VetListResolver,
-      invalidVetList: InvalidVetResolver
+      invalidVetList: InvalidVetResolver,
+      newsletterList: NewsletterResolver
     }
-  }
+  },
+  { path: 'fail',
+    component: FailComponent
+  },
+  { path: '**', pathMatch: 'full',
+    component: PagenotfoundComponent
+  },
 ];
 
 @NgModule({

@@ -13,7 +13,6 @@ export class LoginPageComponent implements OnInit {
   registerForm: FormGroup;
   connectForm: FormGroup;
   submitted = false;
-  maxDate: Date;
   isSignIn: boolean = true;
   hide : boolean = true;
   remember : boolean = false;
@@ -28,7 +27,6 @@ export class LoginPageComponent implements OnInit {
       email : ['', [Validators.required, Validators.email]],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      birthDate : ['', [Validators.required]],
       password : ['', [Validators.required, Validators.minLength(5)]],
       remember: ['', []],
     });
@@ -38,7 +36,6 @@ export class LoginPageComponent implements OnInit {
       password : ['', [Validators.required]],
       remember: ['', []]
     });
-    this.maxDate = new Date();
   }
 
   ngOnInit(): void {

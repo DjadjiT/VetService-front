@@ -15,7 +15,6 @@ export class VetSignupPageComponent implements OnInit {
 
   paymenentMethodList: string[] = paymentMethod
 
-  maxDate: Date;
   hide : boolean = true;
 
   speciality : string[] = SPECIALITYLIST;
@@ -29,7 +28,6 @@ export class VetSignupPageComponent implements OnInit {
       email : ['', [Validators.required, Validators.email]],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      birthDate : ['', [Validators.required]],
       speciality : ['', [Validators.required]],
       password : ['', [Validators.required, Validators.minLength(5)]],
       institutionName: ['', [Validators.required]],
@@ -42,7 +40,6 @@ export class VetSignupPageComponent implements OnInit {
       selectedPayments: new FormArray([], Validators.required),
       appointmentArray: new FormArray([]),
     });
-    this.maxDate = new Date();
   }
 
 
@@ -86,7 +83,6 @@ export class VetSignupPageComponent implements OnInit {
       firstName: this.registerForm.get("firstName")?.value,
       lastName: this.registerForm.get("lastName")?.value,
       email: this.registerForm.get("email")?.value,
-      birthdate: this.registerForm.get("birthDate")?.value,
       password: this.registerForm.get("password")?.value,
       phoneNb: this.registerForm.get("phoneNb")?.value,
       speciality: this.registerForm.get("speciality")?.value,

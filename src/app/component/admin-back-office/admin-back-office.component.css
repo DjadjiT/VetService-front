@@ -39,6 +39,11 @@
   margin: 20px;
 }
 
+.field_mail_body{
+  width: 50vw;
+  margin: 20px;
+}
+
 .new_admin_card{
   margin: 10px;
   justify-content: center;
@@ -82,4 +87,27 @@ th.mat-sort-header-sorted {
 .newsletter_select {
   width: 15vw;
   margin: 20px;
+}
+.newsletter_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+.newsletter_elem{
+  display: flex;
+  flex-flow: row;
+}
+
+.newsletter_card{
+  width: 50vw;
+  margin: 10px;
+}
+
+.delete_btn{
+  margin: 10px;
+  padding: 5px 20px;
+  font-size: 15px;
+  color: white;
+  background-color: #D02F27;
 }

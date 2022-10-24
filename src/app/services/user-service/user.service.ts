@@ -49,7 +49,6 @@ export class UserService {
       {
         firstName: body.firstName,
         lastName: body.lastName,
-        birthdate: body.birthDate,
         password: body.password,
         phoneNb: body.phoneNb
       }, {headers: header}
@@ -62,7 +61,6 @@ export class UserService {
         firstName: body.firstName,
         lastName: body.lastName,
         email: body.email,
-        birthdate: body.birthdate,
         phoneNb: body.phoneNb,
         password: body.password,
         speciality: body.speciality.toLowerCase(),
@@ -100,12 +98,6 @@ export class UserService {
   getInvalidVetList(): Observable<User[]>{
     let header = this.authService.getAuthorizationHeadersWithToken()
     return this.http.get<User[]>(this.baseUrl+"/invalid-vet", {headers: header})
-  }
-
-  postSubscription(): Observable<any>{
-    let header = this.authService.getAuthorizationHeadersWithToken()
-    return this.http.post<any>("/create-subscription", {
-    },{headers: header})
   }
 
   requestMemberSession(){

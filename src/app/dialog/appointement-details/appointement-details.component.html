@@ -150,7 +150,7 @@
         <mat-icon>close</mat-icon> Annuler le rendez-vous
       </button>
 
-      <button mat-stroked-button class="btn_postpone" (click)="changeDate = !changeDate">
+      <button mat-stroked-button class="btn_postpone" (click)="changeDate = !changeDate" [hidden]="role!='client'">
         <mat-icon>update</mat-icon> Déplacer le rendez-vous
       </button>
     </div>

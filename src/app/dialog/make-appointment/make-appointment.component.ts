@@ -50,19 +50,12 @@ export class MakeAppointmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeDialog(){
-    this.dialogRef.close();
-  }
-
   formatDateLocaleDateString(date: Date): string{
     return DateService.formatDateLocaleDateString(date)
   }
 
   validate(){
     let time: Date = new Date(this.appointmentForm.get('date')?.value)
-    let offset: number = time.getTimezoneOffset();
-    offset = Math.abs(offset / 60);
-    time.setHours(time.getHours() + offset);
 
     let body : any = {
       date: time,
@@ -74,6 +67,7 @@ export class MakeAppointmentComponent implements OnInit {
     this.appointmentService.postAppointment(body).subscribe(data => {
       this.toastService.showMessage("Votre rendez vous a été pris avec succès!")
       this.dialogRef.close()
+      window.location.reload()
     }, err => {
       console.log(err)
       this.toastService.showMessage("Une erreur a eu lieu, pendant l'enregistrement de votre rendez vous, réessayer plus tard!")

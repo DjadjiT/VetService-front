@@ -1,0 +1,14 @@
+.payment_failed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.img_failed {
+  width: 220px;
+  height: 220px;
+  margin: 30px;
+  color: red;
+}

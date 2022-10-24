@@ -31,7 +31,6 @@ export class AppointementPageComponent implements OnInit {
   }
 
 
-
   formatDateLocaleDateString(date: Date): string{
     date = new Date(date)
     return DateService.formatDateLocaleDateString(date)
@@ -44,7 +43,8 @@ export class AppointementPageComponent implements OnInit {
     this.updateDate(app)
 
     dialogConfig.data = {
-      app: app
+      app: app,
+      role: this.profile.role
     }
 
     dialogConfig.width = '700px';
