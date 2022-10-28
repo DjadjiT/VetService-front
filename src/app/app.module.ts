@@ -46,6 +46,7 @@ import {NgxStripeModule} from "ngx-stripe";
 import { StoreComponent } from './component/store-component/store.component';
 import { PagenotfoundComponent } from './component/page-not-found/pagenotfound.component';
 import { FailComponent } from './component/fail/fail.component';
+import { SuccessComponent } from './component/success/success.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { FailComponent } from './component/fail/fail.component';
     StoreComponent,
     PagenotfoundComponent,
     FailComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,

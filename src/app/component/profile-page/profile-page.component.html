@@ -139,7 +139,7 @@
         </ng-template>
       </div>
 
-    <div>
+    <div [hidden]="!subscriptionPaid">
       <mat-card style="margin: 10px">
         <mat-card-title class="mat_title">
           <h2>Mes factures</h2>

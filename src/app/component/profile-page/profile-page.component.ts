@@ -210,13 +210,16 @@ export class ProfilePageComponent implements OnInit {
         password: this.form.get("password")?.value,
         phoneNb: this.form.get("phoneNb")?.value
       }
-
-      this.userService.putUser(body).subscribe(data => {
-        this.toastService.showMessage("Votre profil a bien été modifié.")
-        window.location.reload();
-      }, err => {
-        this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
-      })
+      if(this.form.get("password")?.value.length<5 && this.form.get("password")?.value!=''){
+        this.toastService.showMessage("Veuillez rentrer un mot de passe de plus de 5 caractère.")
+      }else{
+        this.userService.putUser(body).subscribe(data => {
+          this.toastService.showMessage("Votre profil a bien été modifié.")
+          window.location.reload();
+        }, err => {
+          this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
+        })
+      }
     }
   }
 

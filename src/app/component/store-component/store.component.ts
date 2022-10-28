@@ -12,6 +12,7 @@ import {UserService} from "../../services/user-service/user.service";
 export class StoreComponent implements OnInit {
 
   productList: Product[] = []
+  basket: Set<Product> = new Set()
 
   constructor(private route: ActivatedRoute, private stripeService: StripeService,
               private userService: UserService) {
@@ -21,10 +22,30 @@ export class StoreComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async buy(prod: Product) {
-    this.stripeService.buyProduct(prod.price.id, prod.id).subscribe(data => {
+  async buy() {
+    let body = []
+    for(let prod of this.basket){
+      body.push(prod)
+    }
+
+    this.stripeService.postBuyItemList(body).subscribe(data => {
       this.userService.redirectToCheckout(data.sessionId)
     })
   }
 
+  addToBasket(prod: Product){
+    this.basket.add(prod)
+  }
+
+  removeFromBasket(prod: Product){
+    this.basket.delete(prod)
+  }
+
+  getTotal(){
+    let total = 0;
+    for(const prod of this.basket){
+      total+=parseFloat(prod.price.unit_amount)
+    }
+    return total.toFixed(2)
+  }
 }

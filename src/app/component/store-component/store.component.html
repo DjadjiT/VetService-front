@@ -1,17 +1,49 @@
+<div class="store_page">
+  <div class="store_content">
+    <ng-container *ngFor="let prod of productList">
+      <mat-card class="product">
+        <mat-card-title-group>
+          <mat-card-title>{{prod.name}}</mat-card-title>
+          <img mat-card-md-image [src]="prod.images[0]" >
+        </mat-card-title-group>
+        <mat-card-content>
+          {{prod.description}}
+        </mat-card-content>
+        <mat-card-actions class="button_div">
+          <h2 style="color: #D02F27">{{prod.price.unit_amount}} €</h2>
+          <button mat-button class="buy_button" (click)="addToBasket(prod)">
+            <mat-icon>add_shopping_cart</mat-icon> Ajouter au panier</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
 
-<div class="store_content">
-  <ng-container *ngFor="let prod of productList">
-    <mat-card class="product">
-      <mat-card-title-group>
-        <mat-card-title>{{prod.name}}</mat-card-title>
-        <img mat-card-md-image [src]="prod.images[0]" >
-      </mat-card-title-group>
-      <mat-card-content>
-        {{prod.description}}
-      </mat-card-content>
-      <mat-card-actions class="button_div">
-        <button mat-button class="buy_button" (click)="buy(prod)">Acheter pour {{prod.price.unit_amount}} €</button>
-      </mat-card-actions>
-    </mat-card>
-  </ng-container>
+  <mat-divider [vertical]="true" style="margin: 20px; height: 80vh"></mat-divider>
+
+  <div>
+    <div class="basket_content">
+      <h1>Panier</h1>
+      <ng-container *ngFor="let prod of basket" class="basket_list">
+        <mat-card class="product">
+          <mat-card-title-group>
+            <mat-card-title>{{prod.name}}</mat-card-title>
+            <img mat-card-md-image [src]="prod.images[0]" >
+          </mat-card-title-group>
+          <mat-card-actions class="button_div">
+            <h2 style="color: #D02F27">{{prod.price.unit_amount}} €</h2>
+            <button mat-button class="remove_button" (click)="removeFromBasket(prod)">
+              <mat-icon>remove_shopping_cart</mat-icon> Supprimer du panier
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+      <h1>Total : {{getTotal()}} €</h1>
+      <button mat-button class="buy_button" (click)="buy()" [disabled]="basket.size==0">
+        <mat-icon>shopping_basket</mat-icon> Passer la commande
+      </button>
+    </div>
+  </div>
+  <div>
+
+  </div>
 </div>

@@ -1,4 +1,4 @@
-.payment_failed {
+.payment_success {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   padding: 20px;
 }
 
-.img_failed {
+.img_success {
   width: 220px;
   height: 220px;
   margin: 30px;

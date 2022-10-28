@@ -19,8 +19,15 @@ import {StoreComponent} from "./component/store-component/store.component";
 import {PagenotfoundComponent} from "./component/page-not-found/pagenotfound.component";
 import {FailComponent} from "./component/fail/fail.component";
 import {NewsletterResolver} from "./resolver/newsletter-resolver/newsletter.resolver";
+import {SuccessComponent} from "./component/success/success.component";
 
 const routes: Routes = [
+  { path: 'fail',
+    component: FailComponent
+  },
+  { path: 'success',
+    component: SuccessComponent
+  },
   {
     path: "",
     component: HomePageComponent,
@@ -79,9 +86,6 @@ const routes: Routes = [
       invalidVetList: InvalidVetResolver,
       newsletterList: NewsletterResolver
     }
-  },
-  { path: 'fail',
-    component: FailComponent
   },
   { path: '**', pathMatch: 'full',
     component: PagenotfoundComponent

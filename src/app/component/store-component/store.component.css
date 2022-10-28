@@ -5,9 +5,22 @@
   flex-direction: row;
   flex-wrap: wrap;
   padding: 30px;
+  width: 65vw;
 }
+
+.basket_content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 10px;
+  flex-grow: 2;
+  width: 30vw;
+}
+
 .product {
-  width: 400px;
+  width: 300px;
   margin: 20px;
 }
 
@@ -18,8 +31,28 @@
   color: white;
   background-color: #00AA55;
 }
+
+.remove_button{
+  margin: 10px;
+  font-size: 15px;
+  color: white;
+  background-color: #D02F27;
+}
 .button_div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
+}
+
+.basket_list{
+  max-height: 60vh;
+}
+
+.store_page{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  padding: 30px;
 }
