@@ -59,7 +59,7 @@
     </mat-form-field>
 
     <mat-card class="card">
-      <mat-card-title style="font-weight: bold">Vaccins</mat-card-title>
+      <mat-card-title style="font-weight: bold"><h2>Vaccins*</h2></mat-card-title>
         <ng-container formArrayName="vaccins">
           <ng-container *ngFor="let vaccinControl of vaccins.controls; index as i">
             <div [formGroupName]="i" class="vaccin">
@@ -113,7 +113,7 @@
 
 
     <mat-card class="card">
-      <mat-card-title style="font-weight: bold">Informations complémentaire</mat-card-title>
+      <mat-card-title style="font-weight: bold"><h2>Informations complémentaire*</h2></mat-card-title>
         <ng-container *ngFor="let note of notesList; index as j">
           <div class="vaccin">
             <div class="left_side_dialog">
@@ -159,6 +159,7 @@
       <button mat-stroked-button
               class="save_btn" (click)="updateRecord()"
               cdkFocusInitial [disabled]="!this.recordForm.valid">Enregistrer les modifications</button>
+      <h6>Les champs annotés d'un '*' sont obligatoires.</h6>
     </ng-template>
   </div>
 </div>

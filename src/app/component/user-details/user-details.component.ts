@@ -41,8 +41,6 @@ export class UserDetailsComponent implements OnInit {
     this.invoiceList.sort((a,b) => {
       return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
     });
-
-    console.log(this.invoiceList)
   }
 
   ngOnInit(): void {
@@ -75,7 +73,21 @@ export class UserDetailsComponent implements OnInit {
         window.location.reload();
       },
       err => {
-        console.log(err)
+        if(err.status == 400){
+          this.toastService.showMessage("Le vétérinaire ne correspond à aucun compte, veuillez réessayer ultérieurement!")
+
+        }else{
+          this.toastService.showMessage("Une erreur est survenue, veuillez réessayer ultérieurement!")
+        }
+      })
+  }
+
+  refuseteVetProfile(){
+    this.authService.refuseVet(this.user.id).subscribe(data => {
+        this.toastService.showMessage("Le compte vétérinaire a bien été refusé!")
+        window.location.reload();
+      },
+      err => {
         if(err.status == 400){
           this.toastService.showMessage("Le vétérinaire ne correspond à aucun compte, veuillez réessayer ultérieurement!")
 
@@ -86,7 +98,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   sendReminderInvoice(){
-
+    this.toastService.showMessage("Pour l'instant le bouton n'as pas d'utilité, nous reviendrons vers vous lorsqu'il y aura du changement.")
   }
 
   validateVet(){
@@ -95,7 +107,6 @@ export class UserDetailsComponent implements OnInit {
         window.location.reload();
       },
       err => {
-        console.log(err)
         if(err.status == 400){
           this.toastService.showMessage("Le vétérinaire ne correspond à aucun compte, veuillez réessayer ultérieurement!")
         }else{

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HealthRecord} from "../../models/healthRecord";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Note} from "../../models/note";
 import {VaccinService} from "../../services/VaccinService";
 import {HealthRecordServiceService} from "../../services/healthRecord-service/health-record-service.service";
@@ -210,5 +210,12 @@ export class DialogRecordComponent implements OnInit {
   isCastratedChecked(radio :string): boolean{
     if(!this.hr) return false
     return (this.hr.sterilised && radio=="Oui") || (!this.hr.sterilised && radio=="Non")
+  }
+
+  get name(): FormControl{
+    return this.recordForm.controls["name"] as FormControl;
+  }
+  get race(): FormControl{
+    return this.recordForm.controls["password"] as FormControl;
   }
 }

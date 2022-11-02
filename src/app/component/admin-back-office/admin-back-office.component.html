@@ -6,29 +6,6 @@
           <h2>Gestion admins</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <table matSort (matSortChange)="sortData($event)">
-        <tr mat-header-row>
-          <th mat-sort-header="email">Adresse mail</th>
-          <th mat-sort-header="firstName">Prénom</th>
-          <th mat-sort-header="lastName">Nom</th>
-          <th>Supprimer</th>
-        </tr>
-
-        <tr mat-row *ngFor="let admin of adminList; index as i" class="new_admin_card">
-          <td>{{admin.email}}</td>
-          <td>{{admin.firstName}}</td>
-          <td>{{admin.lastName}}</td>
-          <td>
-            <button
-              mat-stroked-button
-              (click)="removeFromAdmin(admin)">
-              Supprimer les droits
-              <mat-icon [ngStyle]="{'color':'#D02F27'}">remove_circle_outline</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </table>
-      <mat-divider></mat-divider>
 
       <ng-container [formGroup]="adminForm">
         <div class="admin_card">
@@ -38,6 +15,7 @@
               appearance="outline">
               <mat-label>Adresse mail de l'admin</mat-label>
               <input matInput placeholder="Adresse mail de l'admin" formControlName="email" required>
+              <mat-error *ngIf="email.invalid">{{getFieldErrorMessage('email', 0, email)}}</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -48,6 +26,7 @@
               </button>
               <mat-label>Mot de passe</mat-label>
               <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+              <mat-error *ngIf="password.invalid">{{getFieldErrorMessage('minLength', 5, password)}}</mat-error>
             </mat-form-field>
           </div>
           <div class="admin_row">
@@ -56,12 +35,14 @@
               appearance="outline">
               <mat-label>Nom</mat-label>
               <input matInput placeholder="Nom de l'admin" formControlName="lastName" required>
+              <mat-error *ngIf="lastName.invalid">{{getFieldErrorMessage('required', 0, lastName)}}</mat-error>
             </mat-form-field>
             <mat-form-field
               class="field"
               appearance="outline">
               <mat-label>Prénom</mat-label>
               <input matInput placeholder="Prénom de l'admin" formControlName="firstName" required>
+              <mat-error *ngIf="firstName.invalid">{{getFieldErrorMessage('required', 0, firstName)}}</mat-error>
             </mat-form-field>
 
           </div>
@@ -73,6 +54,34 @@
 
         </div>
       </ng-container>
+
+      <mat-divider style="margin: 20px"></mat-divider>
+
+      <div class="mat_table_center">
+        <table mat-table matSort (matSortChange)="sortAdmin($event)" class="table">
+          <tr mat-header-row>
+            <th mat-sort-header="email">Adresse mail</th>
+            <th mat-sort-header="firstName">Prénom</th>
+            <th mat-sort-header="lastName">Nom</th>
+            <th>Supprimer</th>
+          </tr>
+
+          <tr mat-row *ngFor="let admin of adminList; index as i" class="table_r">
+            <td class="table_row">{{admin.email}}</td>
+            <td class="table_row">{{admin.firstName}}</td>
+            <td class="table_row">{{admin.lastName}}</td>
+            <td class="table_row">
+              <button
+                mat-stroked-button
+                (click)="removeFromAdmin(admin)">
+                Supprimer les droits
+                <mat-icon [ngStyle]="{'color':'#D02F27'}">remove_circle_outline</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -83,55 +92,62 @@
       </mat-expansion-panel-header>
 
       <h3 style="margin: 30px; font-weight: 500">Compte Vétérinaires à valider :</h3>
-      <table matSort (matSortChange)="sortData($event)">
-        <tr mat-header-row>
-          <th mat-header-cell mat-sort-header="email">Adresse mail</th>
-          <th mat-header-cell mat-sort-header="firstName">Prénom</th>
-          <th mat-header-cell mat-sort-header="lastName">Nom</th>
-          <th mat-header-cell mat-sort-header="city">Ville</th>
-          <th>Informations</th>
-        </tr>
+      <div class="mat_table_center">
+        <table mat-table matSort (matSortChange)="sortvetToValidate($event)" class="table">
+          <tr mat-header-row>
+            <th mat-header-cell mat-sort-header="email">Adresse mail</th>
+            <th mat-header-cell mat-sort-header="firstName">Prénom</th>
+            <th mat-header-cell mat-sort-header="lastName">Nom</th>
+            <th mat-header-cell mat-sort-header="city">Ville</th>
+            <th>Informations</th>
+          </tr>
 
-        <tr mat-row *ngFor="let vet of vetToValidate; index as i">
-          <td>{{vet.email}}</td>
-          <td>{{vet.firstName}}</td>
-          <td>{{vet.lastName}}</td>
-          <td>{{vet.city}}</td>
-          <td>
-            <button
-              mat-stroked-button
-              (click)="openVetInfo(vet)">
-              Plus d'informations
-              <mat-icon [ngStyle]="{'color':'#00AA55'}">info</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </table>
+          <tr mat-row *ngFor="let vet of vetToValidate; index as i" class="table_row">
+            <td class="table_row">{{vet.email}}</td>
+            <td class="table_row">{{vet.firstName}}</td>
+            <td class="table_row">{{vet.lastName}}</td>
+            <td class="table_row">{{vet.city}}</td>
+            <td class="table_row">
+              <button
+                mat-stroked-button
+                (click)="openVetInfo(vet)">
+                Plus d'informations
+                <mat-icon [ngStyle]="{'color':'#00AA55'}">info</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
       <h3 style="margin: 30px; font-weight: 500">Listes des vétérinaires :</h3>
-      <table matSort (matSortChange)="sortData($event)">
-        <tr mat-header-row>
-          <th mat-header-cell mat-sort-header="email">Adresse mail</th>
-          <th mat-header-cell mat-sort-header="firstName">Prénom</th>
-          <th mat-header-cell mat-sort-header="lastName">Nom</th>
-          <th mat-header-cell mat-sort-header="city">Ville</th>
-          <th>Informations</th>
-        </tr>
+      <div class="mat_table_center">
+        <table mat-table matSort (matSortChange)="sortVetData($event)" class="table">
+          <tr mat-header-row>
+            <th mat-header-cell mat-sort-header="email">Adresse mail</th>
+            <th mat-header-cell mat-sort-header="firstName">Prénom</th>
+            <th mat-header-cell mat-sort-header="lastName">Nom</th>
+            <th mat-header-cell mat-sort-header="city">Ville</th>
+            <th mat-header-cell mat-sort-header="active">Profil actif</th>
+            <th>Informations</th>
+          </tr>
 
-        <tr mat-row *ngFor="let vet of vetList; index as i">
-          <td>{{vet.email}}</td>
-          <td>{{vet.firstName}}</td>
-          <td>{{vet.lastName}}</td>
-          <td>{{vet.city}}</td>
-          <td>
-            <button
-              mat-stroked-button
-              (click)="openVetInfo(vet)">
-              Plus d'informations
-              <mat-icon [ngStyle]="{'color':'#00AA55'}">info</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </table>
+          <tr mat-row *ngFor="let vet of vetList; index as i" class="table_row">
+            <td class="table_row">{{vet.email}}</td>
+            <td class="table_row">{{vet.firstName}}</td>
+            <td class="table_row">{{vet.lastName}}</td>
+            <td class="table_row">{{vet.city}}</td>
+            <td class="table_row">{{vet.active?'Oui':'Non'}}</td>
+            <td class="table_row">
+              <button
+                mat-stroked-button
+                (click)="openVetInfo(vet)">
+                Plus d'informations
+                <mat-icon [ngStyle]="{'color':'#00AA55'}">info</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -148,15 +164,16 @@
               appearance="outline">
               <mat-label>Corps du mail</mat-label>
               <textarea matInput placeholder="Corps du mail" formControlName="message" required></textarea>
+              <mat-error *ngIf="message.invalid">{{getFieldErrorMessage('required', 0, message)}}</mat-error>
             </mat-form-field>
           </div>
           <div class="admin_row">
-
             <mat-form-field
               class="field"
               appearance="outline">
               <mat-label>Objet du mail du mail</mat-label>
               <input matInput placeholder="Objet du mail du mail" formControlName="object" required>
+              <mat-error *ngIf="object.invalid">{{getFieldErrorMessage('required', 0, object)}}</mat-error>
             </mat-form-field>
 
             <mat-form-field
@@ -167,6 +184,7 @@
                 <mat-option *ngFor="let user of userReceiverList" [value]="user.type">
                   {{user.value}}
                 </mat-option>
+                <mat-error *ngIf="receiver.invalid">{{getFieldErrorMessage('required', 0, receiver)}}</mat-error>
               </mat-select>
             </mat-form-field>
 
@@ -180,14 +198,128 @@
         </div>
       </ng-container>
       <mat-divider></mat-divider>
-      <div class="newsletter_list">
+      <div class="mat_table_center">
         <h2>Historique des newsletter</h2>
-        <div class="newsletter_elem" *ngFor="let newsLetter of newsletterList">
-          <mat-card class="newsletter_card">
-            <mat-card-title>Objet : {{newsLetter.object}}</mat-card-title>
-            <mat-card-subtitle>Date d'envoie: {{formatDateLocaleDateString(newsLetter.date)}}</mat-card-subtitle>
-            <mat-card-content>Corps du mail: {{newsLetter.message}}</mat-card-content>
-          </mat-card>
+        <div style="padding: 20px">
+          <table mat-table matSort (matSortChange)="sortNewsletter($event)" class="table_newsletter">
+            <tr mat-header-row>
+              <th mat-sort-header="object" mat-header-cell >Objet de la newsletter</th>
+              <th mat-sort-header="message" mat-header-cell>Message</th>
+              <th mat-sort-header="receiver" mat-header-cell>Receveur du mail </th>
+              <th mat-sort-header="date" mat-header-cell>Date</th>
+            </tr>
+
+            <tr mat-row *ngFor="let newsLetter of newsletterList" class="table_row">
+              <td class="table_row">{{newsLetter.object}}</td>
+              <td class="table_row">{{newsLetter.message}}</td>
+              <td class="table_row">{{getReceiver(newsLetter.receiver)}}</td>
+              <td class="table_row">{{formatDateLocaleDateString(newsLetter.date)}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="justify-content: center">
+          <h2>Gestion des Commandes</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <h2 style="text-decoration: underline; padding: 20px">Listes des commandes en preparation : </h2>
+      <div style="padding: 20px">
+
+        <div class="mat_table_center">
+          <table mat-table matSort (matSortChange)="sortOrderinPreparation($event)" class="table">
+            <tr mat-header-row>
+              <th mat-sort-header="id" mat-header-cell >id</th>
+              <th mat-sort-header="name" mat-header-cell>Nom</th>
+              <th mat-sort-header="city" mat-header-cell>Adresse postal</th>
+              <th mat-sort-header="email" mat-header-cell>Adresse mail</th>
+              <th mat-sort-header="date" mat-header-cell>Date</th>
+              <th mat-sort-header="shippingMethod" mat-header-cell>Mode de livraison</th>
+              <th >Elements commande</th>
+              <th mat-sort-header="status" mat-header-cell>Statut</th>
+            </tr>
+
+            <tr mat-row *ngFor="let order of orderInPreparationList" class="new_admin_card" class="table_row">
+              <td class="table_row" [matTooltip]="order.csId">{{order._id}}</td>
+              <td class="table_row">{{order.name}}</td>
+              <td class="table_row">{{order.street}}, {{order.postalCode}} {{order.city}} </td>
+              <td class="table_row">{{order.mail}}</td>
+              <td class="table_row">{{formatDateLocaleDateString(order.requestDate)}}</td>
+              <td class="table_row">{{getShippingLabel(order.shippingMethod)}}</td>
+              <td class="table_row">
+                <ul *ngFor="let item of order.item">
+                  <li>{{item.quantity}}x {{item.name}}</li>
+                </ul>
+              </td>
+              <td class="table_row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Status de la livraison :</mat-label>
+                  <mat-select [(value)]="order.status" (selectionChange)="changeOrderStatus($event, order._id)">
+                    <mat-option *ngFor="let status of shippingStatusList" [value]="status.value">
+                      {{status.label}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </div>
+        </div>
+
+      <mat-divider></mat-divider>
+      <h2 style="text-decoration: underline; padding: 20px">Listes des commandes totales : </h2>
+
+      <div class="mat_table_center">
+        <mat-radio-group (change)="filterAllShipping()" [(ngModel)]="filterShoppingStatus">
+          <mat-radio-button style="margin: 10px" value="tout">
+            Tout
+          </mat-radio-button>
+          <mat-radio-button *ngFor="let status of shippingStatusList" [value]="status.value" style="margin: 10px">
+            {{status.label}}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field class="field_mail_body"
+                        appearance="outline">
+          <mat-label>Filtre sur l'id de la commande</mat-label>
+          <input matInput placeholder="Id de la commande" required (input)="filterId($event.target)">
+        </mat-form-field>
+
+        <div style="padding: 20px">
+          <table mat-table matSort (matSortChange)="sortOrder($event)" class="table">
+            <tr mat-header-row>
+              <th mat-sort-header="id">id</th>
+              <th mat-sort-header="name">Nom</th>
+              <th mat-sort-header="city">Adresse postal</th>
+              <th mat-sort-header="email">Adresse mail</th>
+              <th mat-sort-header="date">Date</th>
+              <th mat-sort-header="shippingMethod">Mode de livraison</th>
+              <th mat-sort-header="status">Statut</th>
+            </tr>
+
+            <tr mat-row *ngFor="let order of filteredOrderList" class="new_admin_card" class="table_row">
+              <td class="table_row" [matTooltip]="order.csId">{{order._id}}</td>
+              <td class="table_row">{{order.name}}</td>
+              <td class="table_row">{{order.street}}, {{order.postalCode}} {{order.city}} </td>
+              <td class="table_row">{{order.mail}}</td>
+              <td class="table_row">{{formatDateLocaleDateString(order.requestDate)}}</td>
+              <td class="table_row">{{getShippingLabel(order.shippingMethod)}}</td>
+              <td class="table_row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Status de la livraison :</mat-label>
+                  <mat-select [(value)]="order.status" (selectionChange)="changeOrderStatus($event, order._id)" [disabled]="order.status=='delivered'">
+                    <mat-option *ngFor="let status of shippingStatusList" [value]="status.value">
+                      {{status.label}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </mat-expansion-panel>
@@ -198,6 +330,71 @@
           <h2>Gestion des données Vetservices</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+
+<!--
+            <div class="charts_div">
+              <h3>Statistiques sur les carnet de santé</h3>
+              <ngx-charts-advanced-pie-chart
+                [view]="view"
+                [results]="getHRChartLabelAndData()" >
+              </ngx-charts-advanced-pie-chart>
+            </div>
+
+            <mat-divider [inset]="true" style="margin: 30px"></mat-divider>
+
+            <div class="charts_user">
+              <h3>Statistiques sur les utilisateurs</h3>
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [results]="getUserChartLabelAndData()"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend">
+              </ngx-charts-bar-vertical>
+            </div>
+
+
+      <mat-divider [inset]="true" style="margin: 30px"></mat-divider>
+-->
+
+      <div class="charts_user">
+        <h3>Statistiques sur les Rendez vous</h3>
+        <h3> <span style="text-decoration: underline">Nombre de rendez-vous globaux</span> : {{appStats.number}}</h3>
+
+        <ng-container [formGroup]="appStatsForm">
+          <div class="admin_row">
+            <mat-form-field
+              class="field"
+              appearance="outline" >
+              <mat-label>Date début : </mat-label>
+              <input formControlName="startDate" [max]="maxDate" matInput [matDatepicker]="picker" readonly required>
+              <mat-hint>JJ/MM/AAAA</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field
+              class="field"
+              appearance="outline" >
+              <mat-label>Date fin : </mat-label>
+              <input formControlName="endDate" [min]="startDate" [max]="maxDate" matInput [matDatepicker]="picker2" readonly>
+              <mat-hint>JJ/MM/AAAA</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </ng-container>
+
+        <button
+          mat-stroked-button
+          class="btn"
+          style="margin: 10px"
+          [disabled]="!appStatsForm.valid"
+          (click)="getAppStatsFormValid()">Lancer la recherche</button>
+
+        <h3> <span style="text-decoration: underline; margin: 10px">Nombre de rendez-vous entres les dates</span>: {{appStats.dateFilter.length}}</h3>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
+
 </div>

@@ -29,7 +29,7 @@
           <a target="_blank" [href]="inv.invoiceUrl">Accéder à la facture</a>
         </div>
         <div class="invoices">
-          Etat de l'abonnement lié à cette facture :
+          Etat de l'abonnement lié à cette facture : <span [hidden]="!isSubscriptionValid(inv)" style="color: #00AA55">Valide</span> <span [hidden]="isSubscriptionValid(inv)" style="color: #D02F27">Invalide</span>
         </div>
       </mat-card>
     </div>
@@ -53,7 +53,7 @@
 
   <div mat-dialog-actions class="bottom_btn" *ngIf="!user.active; else isActive">
     <div class="btn_action">
-      <button mat-stroked-button class="refuse_btn" (click)="deactivateVet()">
+      <button mat-stroked-button class="refuse_btn" (click)="refuseteVetProfile()">
         <mat-icon>close</mat-icon> Refuser profil Vétérinaire
       </button>
 

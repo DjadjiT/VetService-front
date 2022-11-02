@@ -11,6 +11,7 @@
           appearance="outline">
           <mat-label>Adresse email</mat-label>
           <input matInput placeholder="Adresse email" formControlName="email" required>
+          <mat-error *ngIf="emailConnect.invalid">{{getFieldErrorMessage('email', 0, emailConnect)}}</mat-error>
           <mat-icon matPrefix>email</mat-icon>
         </mat-form-field>
 
@@ -21,7 +22,8 @@
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-label>Mot de passe</mat-label>
-          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required>
+          <mat-error *ngIf="passwordConnect.invalid">{{getFieldErrorMessage('required', 0, passwordConnect)}}</mat-error>
         </mat-form-field>
 
         <mat-checkbox formControlName="remember" style="margin: 10px">Se souvenir de mon identifiant</mat-checkbox>
@@ -34,7 +36,9 @@
           [disabled]="!connectForm.valid"
         >Se connecter
         </button>
-        <button mat-button style="color: #00AA55;margin: 10px">Mot de passe oublié ?</button>
+
+        <h6>Les champs annotés d'un '*' sont obligatoires.</h6>
+
       </form>
     </div>
     <div [hidden]="isSignIn">
@@ -58,7 +62,8 @@
           appearance="outline">
           <mat-icon matPrefix>phone</mat-icon>
           <mat-label>Numéro de téléphone</mat-label>
-          <input type="tel" formControlName="phoneNb" maxlength="10" matInput placeholder="0123456789">
+          <input type="tel" formControlName="phoneNb" maxlength="10" matInput placeholder="0123456789" required>
+          <mat-error *ngIf="phoneNb.invalid">{{getFieldErrorMessage('pattern', 0, phoneNb)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field
@@ -66,6 +71,7 @@
           appearance="outline">
           <mat-label>Adresse email</mat-label>
           <input matInput placeholder="Adresse email" formControlName="email" required>
+          <mat-error *ngIf="emailRegister.invalid">{{getFieldErrorMessage('email', 0, emailRegister)}}</mat-error>
           <mat-icon matPrefix>email</mat-icon>
         </mat-form-field>
 
@@ -78,7 +84,7 @@
           </button>
           <mat-label>Mot de passe</mat-label>
           <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required>
-          <mat-hint align="start" >La taille minimale est de 5 caractères. </mat-hint>
+          <mat-error *ngIf="passwordRegister.invalid">{{getFieldErrorMessage('minLength', 5, passwordRegister)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field
@@ -87,6 +93,7 @@
           <mat-icon matPrefix>person</mat-icon>
           <mat-label>Nom</mat-label>
           <input formControlName="lastName" matInput required>
+          <mat-error *ngIf="lastName.invalid">{{getFieldErrorMessage('minLength', 2, lastName)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field
@@ -95,6 +102,7 @@
           <mat-icon matPrefix>person_outline</mat-icon>
           <mat-label>Prénom</mat-label>
           <input formControlName="firstName" matInput required>
+          <mat-error *ngIf="firstName.invalid">{{getFieldErrorMessage('minLength', 2, firstName)}}</mat-error>
         </mat-form-field>
 
         <mat-checkbox formControlName="remember" style="margin: 10px">Se souvenir de mon identifiant</mat-checkbox>
@@ -107,6 +115,7 @@
           [disabled]="!registerForm.valid">
           S'inscrire
         </button>
+        <h6>Les champs annotés d'un '*' sont obligatoires.</h6>
       </div>
     </div>
     <div [hidden]="!isSignIn">

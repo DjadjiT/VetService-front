@@ -29,7 +29,6 @@ export class RoleGuardGuard implements CanActivate {
     let user = await this.http.get<User>(this.baseUrl + "/user", {headers: header}).toPromise()
 
     return user.role === role;
-
   }
 
 

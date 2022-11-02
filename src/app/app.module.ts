@@ -47,6 +47,7 @@ import { StoreComponent } from './component/store-component/store.component';
 import { PagenotfoundComponent } from './component/page-not-found/pagenotfound.component';
 import { FailComponent } from './component/fail/fail.component';
 import { SuccessComponent } from './component/success/success.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { SuccessComponent } from './component/success/success.component';
     MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    NgxChartsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     NgxStripeModule.forRoot("pk_test_51LJDWtK6LFtOfBbRrWP5qGJhELzxImM2zjRUOhc2xZENnCxGySmw5zsnBh05OapNhcDFr9HuaiIynYgpg7tyIsoP00llplV2Qh")
   ],

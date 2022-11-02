@@ -21,7 +21,6 @@
   display: flex;
   justify-content: center;
   flex-flow: row;
-  padding: 10px;
 }
 
 .btn{
@@ -88,12 +87,13 @@ th.mat-sort-header-sorted {
   width: 15vw;
   margin: 20px;
 }
-.newsletter_list {
+.mat_table_center {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
 }
+
 .newsletter_elem{
   display: flex;
   flex-flow: row;
@@ -110,4 +110,41 @@ th.mat-sort-header-sorted {
   font-size: 15px;
   color: white;
   background-color: #D02F27;
+}
+
+.charts_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 70vw;
+}
+
+.charts_user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 70vw;
+}
+
+.table_row {
+  padding: 5px;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+
+}
+
+.table {
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+  width: 60vw;
 }

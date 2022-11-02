@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from "../../models/user";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HealthRecord} from "../../models/healthRecord";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DialogRecordComponent} from "../../dialog/dialog-new-record/dialog-record.component";
@@ -14,6 +14,7 @@ import {Schedule} from "../../models/Schedule";
 import {StripeService} from "../../services/stripe-service/stripe.service";
 import {Invoice} from "../../models/invoice";
 import {DateService} from "../../services/DateService";
+import {ErrorMessageService} from "../../services/ErrorMessageService";
 
 @Component({
   selector: 'app-profile-page',
@@ -22,7 +23,7 @@ import {DateService} from "../../services/DateService";
 })
 export class ProfilePageComponent implements OnInit {
 
-  speciality : string[] = SPECIALITYLIST;
+  specialityList : string[] = SPECIALITYLIST;
   form: FormGroup;
   submitted = false;
   hide : boolean = true;
@@ -161,65 +162,79 @@ export class ProfilePageComponent implements OnInit {
   }
 
   canSave() {
-    if (this.profile.role == "veterinary") {
-      //TODO mettre à jour le système de consultation & payment method
+    if(this.checkInputField()){
+      if (this.profile.role == "veterinary") {
+        //TODO mettre à jour le système de consultation & payment method
 
-      let body = {
-        email: this.profile.email,
-        firstName: this.form.get("firstName")?.value,
-        lastName: this.form.get("lastName")?.value,
-        password: this.form.get("password")?.value,
-        phoneNb: this.form.get("phoneNb")?.value,
-        speciality: this.form.get("speciality")?.value,
-        informations: this.form.get("informations")?.value,
-        institutionName: this.form.get("institutionName")?.value,
-        role: "veterinary",
-        street: this.form.get("street")?.value,
-        postalCode: this.form.get("postalCode")?.value,
-        city: this.form.get("city")?.value,
-        country: this.form.get("country")?.value,
-        rpps: this.form.get("rpps")?.value,
-        appointmentType: this.getSelectedAppointment(),
-        paymentMethod: this.getPaymentMethod(),
-      }
+        let body = {
+          email: this.profile.email,
+          firstName: this.form.get("firstName")?.value,
+          lastName: this.form.get("lastName")?.value,
+          password: this.form.get("password")?.value,
+          phoneNb: this.form.get("phoneNb")?.value,
+          speciality: this.form.get("speciality")?.value,
+          informations: this.form.get("informations")?.value,
+          institutionName: this.form.get("institutionName")?.value,
+          role: "veterinary",
+          street: this.form.get("street")?.value,
+          postalCode: this.form.get("postalCode")?.value,
+          city: this.form.get("city")?.value,
+          country: this.form.get("country")?.value,
+          rpps: this.form.get("rpps")?.value,
+          appointmentType: this.getSelectedAppointment(),
+          paymentMethod: this.getPaymentMethod(),
+        }
 
 
-      this.profile.schedule.startingHour = this.scheduleForm.get("start")?.value
-      this.profile.schedule.pauseStart = this.scheduleForm.get("pause")?.value
-      this.profile.schedule.pauseFinish = this.scheduleForm.get("endPause")?.value
-      this.profile.schedule.finishingHour = this.scheduleForm.get("end")?.value
+        this.profile.schedule.startingHour = this.scheduleForm.get("start")?.value
+        this.profile.schedule.pauseStart = this.scheduleForm.get("pause")?.value
+        this.profile.schedule.pauseFinish = this.scheduleForm.get("endPause")?.value
+        this.profile.schedule.finishingHour = this.scheduleForm.get("end")?.value
 
-      this.userService.putUser(body).subscribe(data => {
-        this.userService.updateUserSchedule(this.profile.schedule).subscribe(data => {
-          this.toastService.showMessage("Votre profil a bien été modifié.")
-          window.location.reload();
-        }, err => {
-          this.toastService.showMessage("Votre profil a bien été modifié mais votre planning n'as pas été pris en compte.")
-        })
-
-      }, err => {
-        this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
-      })
-
-    } else {
-
-      let body = {
-        email: this.profile.email,
-        firstName: this.form.get("firstName")?.value,
-        lastName: this.form.get("lastName")?.value,
-        password: this.form.get("password")?.value,
-        phoneNb: this.form.get("phoneNb")?.value
-      }
-      if(this.form.get("password")?.value.length<5 && this.form.get("password")?.value!=''){
-        this.toastService.showMessage("Veuillez rentrer un mot de passe de plus de 5 caractère.")
-      }else{
         this.userService.putUser(body).subscribe(data => {
-          this.toastService.showMessage("Votre profil a bien été modifié.")
-          window.location.reload();
+          this.userService.updateUserSchedule(this.profile.schedule).subscribe(data => {
+            this.toastService.showMessage("Votre profil a bien été modifié.")
+            window.location.reload();
+          }, err => {
+            this.toastService.showMessage("Votre profil a bien été modifié mais votre planning n'as pas été pris en compte.")
+          })
+
         }, err => {
           this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
         })
+
+      } else {
+
+        let body = {
+          email: this.profile.email,
+          firstName: this.form.get("firstName")?.value,
+          lastName: this.form.get("lastName")?.value,
+          password: this.form.get("password")?.value,
+          phoneNb: this.form.get("phoneNb")?.value
+        }
+        if(this.form.get("password")?.value.length<5 && this.form.get("password")?.value!=''){
+          this.toastService.showMessage("Veuillez rentrer un mot de passe de plus de 5 caractère.")
+        }else{
+          this.userService.putUser(body).subscribe(data => {
+            this.toastService.showMessage("Votre profil a bien été modifié.")
+            window.location.reload();
+          }, err => {
+            this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
+          })
+        }
       }
+    }else{
+      this.toastService.showMessage("Les champs n'ont pas été remplis correctement.")
+    }
+  }
+
+  checkInputField(): boolean{
+    if(this.profile.role == "veterinary"){
+      return this.firstName.valid &&this.lastName.valid &&this.phoneNb.valid
+        && this.speciality.valid &&this.institutionName.valid &&this.street.valid &&this.postalCode.valid
+        && this.city.valid &&this.rpps.valid
+    }else {
+      return this.firstName.valid &&this.lastName.valid &&this.phoneNb.valid
     }
   }
 
@@ -315,6 +330,54 @@ export class ProfilePageComponent implements OnInit {
 
   formatDateLocaleDateString(date: string): string{
     return DateService.formatDateLocaleDateString(new Date(date))
+  }
+
+  getFieldErrorMessage(mode: string, min: number, formControl: FormControl){
+    switch (mode){
+      case "email":
+        return ErrorMessageService.getEmailErrorMessage(formControl)
+      case "required":
+        return ErrorMessageService.getEmailErrorMessage(formControl)
+      case "minLength":
+        return ErrorMessageService.getFieldErrorMinLength(formControl, min)
+      case "pattern":
+        return ErrorMessageService.getFieldErrorPhoneNumber(formControl)
+    }
+    return ""
+  }
+
+  get email(): FormControl{
+    return this.form.controls["email"] as FormControl;
+  }
+  get password(): FormControl{
+    return this.form.controls["password"] as FormControl;
+  }
+  get phoneNb(): FormControl{
+    return this.form.controls["phoneNb"] as FormControl;
+  }
+  get firstName(): FormControl{
+    return this.form.controls["firstName"] as FormControl;
+  }
+  get lastName(): FormControl{
+    return this.form.controls["lastName"] as FormControl;
+  }
+  get speciality(): FormControl{
+    return this.form.controls["speciality"] as FormControl;
+  }
+  get institutionName(): FormControl{
+    return this.form.controls["institutionName"] as FormControl;
+  }
+  get street(): FormControl{
+    return this.form.controls["street"] as FormControl;
+  }
+  get postalCode(): FormControl{
+    return this.form.controls["postalCode"] as FormControl;
+  }
+  get city(): FormControl{
+    return this.form.controls["city"] as FormControl;
+  }
+  get rpps(): FormControl{
+    return this.form.controls["rpps"] as FormControl;
   }
 
 }

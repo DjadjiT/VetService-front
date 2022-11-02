@@ -135,6 +135,12 @@ export class AuthService {
     )
   }
 
+  refuseVet(id: string): Observable<any> {
+    return this.http.put<any>(this.baseUrl+"/refuse/"+id,
+      {}, { headers:  this.getAuthorizationHeadersWithToken()}
+    )
+  }
+
   showToaster(message: string) {
     this.toastService.showMessage(message);
   }

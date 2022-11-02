@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 
 import {SPECIALITYLIST, paymentMethod} from '../../models/Constant'
 import {AuthService} from "../../services/auth-service/auth.service";
+import {ErrorMessageService} from "../../services/ErrorMessageService";
 
 @Component({
   selector: 'app-vet-signup-page',
@@ -17,7 +18,7 @@ export class VetSignupPageComponent implements OnInit {
 
   hide : boolean = true;
 
-  speciality : string[] = SPECIALITYLIST;
+  specialityList : string[] = SPECIALITYLIST;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService) {
@@ -109,8 +110,57 @@ export class VetSignupPageComponent implements OnInit {
     return res
   }
 
+  getFieldErrorMessage(mode: string, min: number, formControl: FormControl){
+    switch (mode){
+      case "email":
+        return ErrorMessageService.getEmailErrorMessage(formControl)
+      case "required":
+        return ErrorMessageService.getEmailErrorMessage(formControl)
+      case "minLength":
+        return ErrorMessageService.getFieldErrorMinLength(formControl, min)
+      case "pattern":
+        return ErrorMessageService.getFieldErrorPhoneNumber(formControl)
+    }
+    return ""
+  }
+
+
   get appointmentArray(){
     return this.registerForm.controls["appointmentArray"] as FormArray;
+  }
+
+  get email(): FormControl{
+    return this.registerForm.controls["email"] as FormControl;
+  }
+  get password(): FormControl{
+    return this.registerForm.controls["password"] as FormControl;
+  }
+  get phoneNb(): FormControl{
+    return this.registerForm.controls["phoneNb"] as FormControl;
+  }
+  get firstName(): FormControl{
+    return this.registerForm.controls["firstName"] as FormControl;
+  }
+  get lastName(): FormControl{
+    return this.registerForm.controls["lastName"] as FormControl;
+  }
+  get speciality(): FormControl{
+    return this.registerForm.controls["speciality"] as FormControl;
+  }
+  get institutionName(): FormControl{
+    return this.registerForm.controls["institutionName"] as FormControl;
+  }
+  get street(): FormControl{
+    return this.registerForm.controls["street"] as FormControl;
+  }
+  get postalCode(): FormControl{
+    return this.registerForm.controls["postalCode"] as FormControl;
+  }
+  get city(): FormControl{
+    return this.registerForm.controls["city"] as FormControl;
+  }
+  get rpps(): FormControl{
+    return this.registerForm.controls["rpps"] as FormControl;
   }
 
 }

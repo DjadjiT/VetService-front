@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth-service/auth.service";
 import {Router} from "@angular/router";
+import {ErrorMessageService} from "../../services/ErrorMessageService";
 
 @Component({
   selector: 'app-login-page',
@@ -51,5 +52,42 @@ export class LoginPageComponent implements OnInit {
 
   signUp(){
     this.authService.registerUser(this.registerForm.value)
+  }
+
+  getFieldErrorMessage(mode: string, min: number, formControl: FormControl){
+    switch (mode){
+      case "email":
+        return ErrorMessageService.getEmailErrorMessage(formControl)
+      case "required":
+        return ErrorMessageService.getFieldErrorMessage(formControl)
+      case "minLength":
+        return ErrorMessageService.getFieldErrorMinLength(formControl, min)
+      case "pattern":
+        return ErrorMessageService.getFieldErrorPhoneNumber(formControl)
+    }
+    return ""
+  }
+
+  get emailConnect(): FormControl{
+    return this.connectForm.controls["email"] as FormControl;
+  }
+
+  get emailRegister(): FormControl{
+    return this.registerForm.controls["email"] as FormControl;
+  }
+  get passwordRegister(): FormControl{
+    return this.registerForm.controls["password"] as FormControl;
+  }
+  get passwordConnect(): FormControl{
+    return this.connectForm.controls["password"] as FormControl;
+  }
+  get phoneNb(): FormControl{
+    return this.registerForm.controls["phoneNb"] as FormControl;
+  }
+  get firstName(): FormControl{
+    return this.registerForm.controls["firstName"] as FormControl;
+  }
+  get lastName(): FormControl{
+    return this.registerForm.controls["lastName"] as FormControl;
   }
 }

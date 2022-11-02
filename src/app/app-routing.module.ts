@@ -20,6 +20,11 @@ import {PagenotfoundComponent} from "./component/page-not-found/pagenotfound.com
 import {FailComponent} from "./component/fail/fail.component";
 import {NewsletterResolver} from "./resolver/newsletter-resolver/newsletter.resolver";
 import {SuccessComponent} from "./component/success/success.component";
+import {HrStatsResolver} from "./resolver/hrStats-resolver/hr-stats.resolver";
+import {AppStatsResolver} from "./resolver/appStats-resolver/app-stats.resolver";
+import {UserStatsResolver} from "./resolver/userStats-resolver/user-stats.resolver";
+import {OrderInPreparationListResolver} from "./resolver/order-list-resolver/order-in-preparation-list-resolver.service";
+import {OrderListResolver} from "./resolver/order-list-resolver/order-list-resolver.service";
 
 const routes: Routes = [
   { path: 'fail',
@@ -84,7 +89,12 @@ const routes: Routes = [
       adminList: AdminListResolver,
       vetList: VetListResolver,
       invalidVetList: InvalidVetResolver,
-      newsletterList: NewsletterResolver
+      hrStats: HrStatsResolver,
+      appStats: AppStatsResolver,
+      userStats: UserStatsResolver,
+      newsletterList: NewsletterResolver,
+      orderInPreparationList: OrderInPreparationListResolver,
+      orderList: OrderListResolver
     }
   },
   { path: '**', pathMatch: 'full',

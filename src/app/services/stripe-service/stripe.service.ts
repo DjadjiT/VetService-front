@@ -35,15 +35,32 @@ export class StripeService {
     return this.http.get<Product[]>(this.baseUrl+"/product-list")
   }
 
-  buyProduct(prodId: string): Observable<any>{
-    return this.http.get(this.baseUrl+"/product?productId="+prodId)
-  }
 
   postBuyItemList(prodList: any[]): Observable<any>{
-    let header = this.authService.getAuthorizationHeadersWithToken()
-
     return this.http.post<any>(this.baseUrl+"/product",
-      prodList
-      , {headers: header})
+      prodList)
+  }
+
+  getOrderByStatus(status: string): Observable<any>{
+    let header = this.authService.getAuthorizationHeadersWithToken()
+    return this.http.get<any>(this.baseUrl+"/order?status="+status,
+      {headers: header})
+  }
+
+  getAllOrder(): Observable<any>{
+    let header = this.authService.getAuthorizationHeadersWithToken()
+    return this.http.get<any>(this.baseUrl+"/orders",
+      {headers: header})
+  }
+
+
+  putOrder(status: string, id: string): Observable<any>{
+    let header = this.authService.getAuthorizationHeadersWithToken()
+    let body = {
+      status: status
+    }
+    return this.http.put<any>(this.baseUrl+"/order/"+id,
+      body,
+      {headers: header})
   }
 }
