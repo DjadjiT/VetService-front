@@ -28,14 +28,12 @@ export class LoginPageComponent implements OnInit {
       email : ['', [Validators.required, Validators.email]],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      password : ['', [Validators.required, Validators.minLength(5)]],
-      remember: ['', []],
+      password : ['', [Validators.required, Validators.minLength(5)]]
     });
 
     this.connectForm = this.formBuilder.group({
       email : ['', [Validators.required, Validators.email]],
       password : ['', [Validators.required]],
-      remember: ['', []]
     });
   }
 

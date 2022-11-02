@@ -26,8 +26,6 @@
           <mat-error *ngIf="passwordConnect.invalid">{{getFieldErrorMessage('required', 0, passwordConnect)}}</mat-error>
         </mat-form-field>
 
-        <mat-checkbox formControlName="remember" style="margin: 10px">Se souvenir de mon identifiant</mat-checkbox>
-
         <button
           mat-stroked-button
           class="inside_btn"
@@ -104,8 +102,6 @@
           <input formControlName="firstName" matInput required>
           <mat-error *ngIf="firstName.invalid">{{getFieldErrorMessage('minLength', 2, firstName)}}</mat-error>
         </mat-form-field>
-
-        <mat-checkbox formControlName="remember" style="margin: 10px">Se souvenir de mon identifiant</mat-checkbox>
 
         <button
           mat-stroked-button
