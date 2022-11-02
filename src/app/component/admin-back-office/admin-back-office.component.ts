@@ -198,13 +198,13 @@ export class AdminBackOfficeComponent implements OnInit {
   }
 
   sortOrder(sort: Sort) {
-    const data = this.orderList.slice();
+    const data = this.filteredOrderList.slice();
     if (!sort.active || sort.direction === '') {
-      this.orderList = data;
+      this.filteredOrderList = data;
       return;
     }
 
-    this.orderList = data.sort((a, b) => {
+    this.filteredOrderList = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'email':
@@ -264,6 +264,7 @@ export class AdminBackOfficeComponent implements OnInit {
       }
     });
   }
+
   sortOrderinPreparation(sort: Sort) {
     const data = this.orderInPreparationList.slice();
     if (!sort.active || sort.direction === '') {
