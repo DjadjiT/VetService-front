@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {StripeService} from "../../services/stripe-service/stripe.service";
 import {Product} from "../../models/Product";
 import {UserService} from "../../services/user-service/user.service";
+import {ToastService} from "../../services/toast-service/toast.service";
 
 @Component({
   selector: 'app-store',
@@ -15,7 +16,7 @@ export class StoreComponent implements OnInit {
   basket: Set<Product> = new Set()
 
   constructor(private route: ActivatedRoute, private stripeService: StripeService,
-              private userService: UserService) {
+              private userService: UserService, private toastService: ToastService) {
     this.route.data.subscribe(data => this.productList = data.storeItem);
   }
 
@@ -34,6 +35,9 @@ export class StoreComponent implements OnInit {
   }
 
   addToBasket(prod: Product){
+    if(this.basket.has(prod)){
+      this.toastService.showMessage("Le produit a déjà été rajouté panier, vous pourrez modifier les quantité dans la page de paiement." )
+    }
     this.basket.add(prod)
   }
 

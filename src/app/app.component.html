@@ -124,7 +124,10 @@
     <button mat-stroked-button color="#0" routerLink="admin" [hidden]="role!=='admin'">
       <mat-icon>security</mat-icon> Espace Administrateur
     </button>
-    <button mat-stroked-button color="#0" routerLink="appointement">
+    <button mat-stroked-button color="#0" routerLink="" [hidden]="!(role==='client' || role==='veterinary')">
+      <mat-icon>calendar_today</mat-icon> Prendre rendez vous
+    </button>
+    <button mat-stroked-button color="#0" routerLink="appointement" [hidden]="!(role==='client' || role==='veterinary')">
       <mat-icon>date_range</mat-icon> Mes rendez-vous
     </button>
     <button mat-stroked-button color="#0" routerLink="profile">
