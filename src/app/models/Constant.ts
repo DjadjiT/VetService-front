@@ -2,10 +2,9 @@
 export const SPECIALITYLIST: string[] = [
     "Médecine du comportement des animaux domestiques",
     "Médecine interne des animaux de compagnie",
-    "Médecine interne des animaux de compagnie, option cardiologie",
     "Anatomie pathologique vétérinaire",
     "Chirurgie des animaux de compagnie",
-    "Chirurgie équine",
+    "Chirurgie des animaux d'élevage",
     "Dermatologie vétérinaire",
     "Elevage et pathologie des équidés",
     "Gestion de la santé des bovins",
@@ -17,11 +16,7 @@ export const SPECIALITYLIST: string[] = [
     "Neurologie vétérinaire",
     "Nutrition clinique vétérinaire",
     "Ophtalmologie vétérinaire",
-    "Pathologie clinique vétérinaire",
     "Santé et productions animales en régions chaudes",
-    "Santé publique vétérinaire - sciences des aliments",
-    "Santé publique vétérinaire - médecine des populations",
-    "Sciences et médecine des animaux de laboratoire",
     "Stomatologie et dentisterie vétérinaires"
   ];
 
