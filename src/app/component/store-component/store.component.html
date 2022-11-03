@@ -23,6 +23,12 @@
   <div>
     <div class="basket_content">
       <h1>Panier</h1>
+
+      <h1>Total : {{getTotal()}} €</h1>
+      <button mat-button class="buy_button" (click)="buy()" [disabled]="basket.size==0">
+        <mat-icon>shopping_basket</mat-icon> Passer la commande
+      </button>
+
       <ng-container *ngFor="let prod of basket" class="basket_list">
         <mat-card class="product">
           <mat-card-title-group>
@@ -37,10 +43,6 @@
           </mat-card-actions>
         </mat-card>
       </ng-container>
-      <h1>Total : {{getTotal()}} €</h1>
-      <button mat-button class="buy_button" (click)="buy()" [disabled]="basket.size==0">
-        <mat-icon>shopping_basket</mat-icon> Passer la commande
-      </button>
     </div>
   </div>
   <div>
