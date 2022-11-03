@@ -150,6 +150,7 @@ export class AppointementDetailsComponent implements OnInit {
     this.appointmentService.putAppointment(new Date(date), this.app.id).subscribe(data => {
 
       this.toastService.showMessage("Le changement de date de votre rendez-vous, a bien été pris en compte!")
+      window.location.reload();
     }, err => {
       this.toastService.showMessage("Une erreur est survenue, veuillez réessayer plus tard")
     })
